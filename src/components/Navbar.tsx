@@ -35,18 +35,19 @@ export default function Navbar() {
             Resume
           </a>
         </div>
-
-        {/* Mobile Hamburger Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden flex flex-col items-center justify-center gap-[5px] w-8 h-8 relative z-[60] ml-auto"
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-5 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
-          <span className={`block w-5 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-5 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
-        </button>
       </nav>
+
+      {/* Mobile Hamburger/Close Button — outside nav so it stays above the menu overlay */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="md:hidden fixed top-4 right-6 flex flex-col items-center justify-center gap-[5px] w-8 h-8"
+        style={{ zIndex: 60 }}
+        aria-label="Toggle menu"
+      >
+        <span className={`block w-5 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[7px]" : ""}`} />
+        <span className={`block w-5 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+        <span className={`block w-5 h-[2px] bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[7px]" : ""}`} />
+      </button>
 
       {/* Mobile Full-Screen Menu — outside nav to avoid mix-blend-difference */}
       <div
