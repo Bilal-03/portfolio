@@ -147,6 +147,14 @@ export default function ScrollyCanvas({
           className="absolute inset-0 w-full h-full"
           style={{ willChange: "transform", transform: "translateZ(0)" }}
         />
+        {/* Bottom gradient to cover watermark */}
+        <div
+          className="absolute bottom-0 left-0 w-full z-[5] pointer-events-none"
+          style={{
+            height: "120px",
+            background: "linear-gradient(to bottom, transparent, #121212 85%)",
+          }}
+        />
         <div className="absolute inset-0 w-full h-full z-10">
           {children}
         </div>
