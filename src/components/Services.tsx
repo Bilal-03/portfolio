@@ -29,14 +29,14 @@ const SERVICES_DATA = [
 
 export default function Services() {
   return (
-    <section id="services" className="bg-[#121212] text-white py-32 px-6 md:px-12 lg:px-24">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 md:gap-24">
+    <section id="services" className="bg-[#121212] text-white py-16 md:py-32 px-4 md:px-12 lg:px-24">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 md:gap-24">
         
         <div className="md:w-1/3 flex flex-col items-start">
           <p className="text-xs tracking-widest uppercase text-white/40 mb-6 font-semibold border border-white/10 rounded-full px-4 py-1">
             Core Capabilities
           </p>
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-8 leading-tight">
+          <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter mb-6 md:mb-8 leading-tight">
             What <span className="text-white/50 block">I Do</span>
           </h2>
           <p className="text-white/60 text-lg font-light leading-relaxed">
@@ -48,7 +48,7 @@ export default function Services() {
           {SERVICES_DATA.map((service, idx) => (
             <div 
               key={idx} 
-              className="group relative p-8 md:p-10 rounded-3xl bg-[#171717] border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden flex flex-col md:flex-row gap-8 items-start hover:bg-[#1a1a1a]"
+              className="group relative p-5 md:p-10 rounded-2xl md:rounded-3xl bg-[#171717] border border-white/5 hover:border-white/20 transition-all duration-500 overflow-hidden flex flex-col md:flex-row gap-4 md:gap-8 items-start hover:bg-[#1a1a1a]"
             >
               <div className="text-white/20 font-mono text-xl uppercase tracking-widest font-bold pt-1 group-hover:text-blue-500 transition-colors">
                 {service.num}

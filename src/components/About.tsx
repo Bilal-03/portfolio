@@ -2,8 +2,8 @@ import React from "react";
 
 export default function About() {
   return (
-    <section id="about" className="bg-[#121212] text-white py-24 px-6 md:px-12 lg:px-24 border-t border-white/5 relative">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <section id="about" className="bg-[#121212] text-white py-16 md:py-24 px-4 md:px-12 lg:px-24 border-t border-white/5 relative">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
         {/* Left Side: Image / Visual */}
         <div className="relative aspect-[4/5] w-full max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden filter grayscale hover:grayscale-0 transition-all duration-700 contrast-125 border border-white/10">
           <img 
@@ -38,7 +38,7 @@ export default function About() {
             </p>
           </div>
 
-          <div className="flex items-center gap-8 md:gap-12 mt-12 bg-[#1a1a1a] p-8 rounded-2xl border border-white/5 w-max">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 mt-10 md:mt-12 bg-[#1a1a1a] p-5 md:p-8 rounded-2xl border border-white/5 w-full md:w-max">
             <div>
               <p className="text-3xl md:text-4xl font-bold tracking-tighter mb-1 border-b-2 border-transparent hover:border-blue-500 transition-colors cursor-pointer w-max">2</p>
               <p className="text-[10px] md:text-xs tracking-widest uppercase text-white/40 mt-1">SDE Internships</p>

@@ -9,16 +9,16 @@ const TOOLS = [
 
 export default function Arsenal() {
   return (
-    <section className="bg-[#121212] text-white py-24 px-6 md:px-12 lg:px-24 overflow-hidden border-t border-white/5">
+    <section className="bg-[#121212] text-white py-16 md:py-24 px-4 md:px-12 lg:px-24 overflow-hidden border-t border-white/5">
       <div className="max-w-7xl mx-auto">
         <p className="text-xs font-semibold tracking-widest uppercase text-white/40 mb-2">
           Technologies & Tools
         </p>
-        <h2 className="text-4xl md:text-6xl font-bold tracking-tighter mb-12">
+        <h2 className="text-3xl md:text-4xl lg:text-6xl font-bold tracking-tighter mb-8 md:mb-12">
           Arsenal
         </h2>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-3 md:gap-4">
           {TOOLS.map((tool, idx) => (
             <div 
               key={idx}

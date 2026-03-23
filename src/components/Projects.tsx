@@ -23,13 +23,13 @@ const PROJECT_DATA = [
 
 export default function Projects() {
   return (
-    <section id="work" className="bg-[#121212] text-white py-32 px-6 md:px-12 lg:px-24">
+    <section id="work" className="bg-[#121212] text-white py-16 md:py-32 px-4 md:px-12 lg:px-24">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-5xl md:text-7xl font-bold tracking-tighter mb-16">
+        <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter mb-10 md:mb-16">
           Selected <span className="text-white/40">Works</span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
           {PROJECT_DATA.map((project, idx) => (
             <div 
               key={idx} 
