@@ -1,6 +1,6 @@
 "use client";
 
-import { useScroll, useMotionValueEvent, motion } from "framer-motion";
+import { useScroll, useMotionValueEvent } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 export default function ScrollyCanvas({
@@ -15,12 +15,15 @@ export default function ScrollyCanvas({
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const lastDrawnIndex = useRef<number>(-1);
+  const rafId = useRef<number | null>(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Preload images
+  // Preload images efficiently
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     
@@ -28,9 +31,10 @@ export default function ScrollyCanvas({
         const img = new Image();
         const frameStr = i.toString().padStart(3, "0");
         img.src = `${folder}/frame_${frameStr}_delay-0.041s.png`;
+        
         img.onload = () => {
             if (i === 0) {
-                // Initial render once first image loads
+                // Instantly render first frame the millisecond it's ready
                 renderFrame(0, loadedImages);
             }
         };
@@ -40,23 +44,31 @@ export default function ScrollyCanvas({
   }, [totalFrames, folder]);
 
   const renderFrame = (index: number, imgArray = images) => {
+    if (index === lastDrawnIndex.current) return;
     if (!canvasRef.current || !imgArray[index] || !imgArray[index].complete) return;
+    
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
+    
+    // Performance: alpha: false removes transparency overhead
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
     const img = imgArray[index];
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    
+    // Only resize canvas if window size dramatically changes, but for simplicity we sync here
+    if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
 
-    // object-fit: cover logic
+    // object-fit: cover exact math
     const hRatio = canvas.width / img.width;
     const vRatio = canvas.height / img.height;
     const ratio = Math.max(hRatio, vRatio);
     const centerShift_x = (canvas.width - img.width * ratio) / 2;
     const centerShift_y = (canvas.height - img.height * ratio) / 2;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Draw directly mapped
     ctx.drawImage(
       img,
       0,
@@ -68,15 +80,20 @@ export default function ScrollyCanvas({
       img.width * ratio,
       img.height * ratio
     );
+    
+    lastDrawnIndex.current = index;
   };
 
   useEffect(() => {
      renderFrame(0);
      
      const handleResize = () => {
+         // Reset last drawn to force redraw
+         lastDrawnIndex.current = -1;
          const currentProgress = scrollYProgress.get();
-         const frameIndex = Math.min(totalFrames - 1, Math.floor(currentProgress * totalFrames));
-         renderFrame(frameIndex);
+         const frameIndex = Math.min(totalFrames - 1, Math.max(0, Math.floor(currentProgress * totalFrames)));
+         if (rafId.current) cancelAnimationFrame(rafId.current);
+         rafId.current = requestAnimationFrame(() => renderFrame(frameIndex));
      };
      
      window.addEventListener('resize', handleResize);
@@ -84,8 +101,13 @@ export default function ScrollyCanvas({
   }, [images]);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const frameIndex = Math.min(totalFrames - 1, Math.floor(latest * totalFrames));
-    renderFrame(frameIndex);
+    const frameIndex = Math.min(totalFrames - 1, Math.max(0, Math.floor(latest * totalFrames)));
+    
+    // Cancel previous frame paint to avoid stack overflow or screen tearing
+    if (rafId.current) cancelAnimationFrame(rafId.current);
+    
+    // Defer painting to browser render cycle for silky smooth 60fps
+    rafId.current = requestAnimationFrame(() => renderFrame(frameIndex));
   });
 
   return (
