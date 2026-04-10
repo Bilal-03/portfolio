@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
-import ScrollyCanvas from "@/components/ScrollyCanvas";
-import Overlay from "@/components/Overlay";
+import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Arsenal from "@/components/Arsenal";
 import Projects from "@/components/Projects";
@@ -10,22 +9,15 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="bg-[#121212] min-h-screen font-sans text-white">
+    <main className="bg-[#0a0a0b] min-h-screen text-white">
       <Navbar />
-      
-      <div className="relative">
-        <ScrollyCanvas totalFrames={192} folder="/sequence" />
-        <Overlay />
-      </div>
-
-      <div className="relative z-20 bg-[#121212]">
-        <Services />
-        <Arsenal />
-        <Projects />
-        <About />
-        <Experience />
-        <Footer />
-      </div>
+      <Hero />
+      <Services />
+      <Arsenal />
+      <Projects />
+      <About />
+      <Experience />
+      <Footer />
     </main>
   );
 }

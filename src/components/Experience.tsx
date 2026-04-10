@@ -1,83 +1,128 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
+
+const EXPERIENCES = [
+  {
+    title: "Project Coordinator (Intern)",
+    company: "Digital Data Solutions",
+    location: "On-site",
+    period: "Jan 2026 – Present",
+    current: true,
+    bullets: [
+      "Coordinating end-to-end scanning and digitisation projects, ensuring quality control and timely delivery of large-scale document processing initiatives.",
+      "Managing project timelines, resource allocation, and cross-functional team coordination to optimise turnaround times for digitisation tasks.",
+      "Driving process improvement initiatives and stakeholder communication in a company that leads in scanning and digitisation services.",
+    ],
+  },
+  {
+    title: "SDE Intern",
+    company: "Techpanion Solutions",
+    location: "Remote",
+    period: "Jun 2024 – Jul 2024",
+    current: false,
+    bullets: [
+      "Built AI-powered invoice extraction microservice using Python, Flask, OpenCV, Tesseract OCR, spaCy achieving 84% accuracy on diverse invoice formats.",
+      "Designed 4-stage processing pipeline (preprocessing, OCR, NER-based extraction, validation) with 4s processing time per document.",
+      "Extracted critical fields (invoice numbers, vendor names, dates, amounts) using hybrid approach combining regex patterns and custom-trained Named Entity Recognition models.",
+    ],
+  },
+  {
+    title: "Software Development Intern",
+    company: "ICtrlBiz Consulting",
+    location: "Noida, India",
+    period: "Aug 2023 – Dec 2023",
+    current: false,
+    bullets: [
+      "Developed a CRM and Lead Management System using React.js, Supabase, PostgreSQL, Tailwind CSS with drag-and-drop pipeline managing 500+ leads.",
+      "Implemented secure multi-user authentication, real-time analytics dashboard, and meeting scheduler achieving 95+ Lighthouse score.",
+      "Built responsive UI with advanced filtering, CSV export, and automated workflow features improving team efficiency by 40%.",
+    ],
+  },
+];
 
 export default function Experience() {
   return (
-    <section id="experience" className="bg-[#121212] text-white py-16 md:py-32 px-4 md:px-12 lg:px-24">
-      <div className="max-w-4xl mx-auto flex flex-col items-center">
-        
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold tracking-tighter mb-6">
-            Professional <span className="text-white/40">Experience</span>
+    <section
+      id="experience"
+      className="relative bg-[#0a0a0b] text-white py-20 md:py-32 px-6 md:px-12 lg:px-24"
+    >
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-14 md:mb-20"
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] mb-5">
+            Professional <span className="text-white/35">Experience</span>
           </h2>
-          <p className="text-xs tracking-widest uppercase text-white/40 font-semibold border border-white/10 rounded-full px-4 py-2 mx-auto w-max bg-[#1a1a1a]">
+          <span className="inline-block text-[11px] tracking-[0.2em] uppercase text-white/35 font-medium border border-white/8 rounded-full px-5 py-2 bg-white/[0.02]">
             My Career Journey
-          </p>
-        </div>
+          </span>
+        </motion.div>
 
-        <div className="space-y-8 md:space-y-12 w-full border-l border-white/10 ml-2 md:ml-0 pl-5 md:pl-12 relative">
-          {/* Experience Item 1 */}
-          <div className="w-full relative py-6 px-5 md:py-8 md:px-10 rounded-2xl md:rounded-3xl bg-[#1a1a1a] border border-white/5 shadow-2xl">
-            <span className="absolute -left-[29px] md:-left-[70px] top-10 md:top-12 w-3 h-3 md:w-4 md:h-4 rounded-full bg-blue-500 border-[3px] md:border-4 border-[#121212] flex items-center justify-center">
-               <span className="w-2 h-2 bg-white rounded-full animate-ping"></span>
-            </span>
-            <div className="flex flex-col md:flex-row md:items-start justify-between mb-8 gap-4">
-              <div>
-                <h3 className="text-xl md:text-3xl font-bold tracking-tight mb-2">SDE Intern</h3>
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 text-sm text-white/60 font-medium">
-                  <span className="flex items-center gap-2"><span className="w-4 h-4 rounded bg-white/10 grid place-items-center">🏢</span> Techpanion Solutions</span>
-                  <span className="hidden md:block w-1 h-1 rounded-full bg-white/20"></span>
-                  <span className="flex items-center gap-2">📍 Remote</span>
+        {/* Timeline */}
+        <div className="relative pl-6 md:pl-10 border-l border-white/[0.06]">
+          {EXPERIENCES.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: idx * 0.15, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const }}
+              className={`relative pb-12 ${idx === EXPERIENCES.length - 1 ? "pb-0" : ""}`}
+            >
+              {/* Timeline dot */}
+              <div
+                className={`absolute -left-[calc(1.5rem+5px)] md:-left-[calc(2.5rem+5px)] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-[#0a0a0b] ${
+                  exp.current
+                    ? "bg-[var(--color-accent)] shadow-[0_0_12px_rgba(99,102,241,0.4)]"
+                    : "bg-white/20"
+                }`}
+              />
+
+              {/* Card */}
+              <div className="p-5 md:p-8 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] transition-all duration-500">
+                {/* Header Row */}
+                <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 mb-6">
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-2 text-white/90">
+                      {exp.title}
+                    </h3>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 text-sm text-white/40 font-medium">
+                      <span>{exp.company}</span>
+                      <span className="hidden sm:block w-1 h-1 rounded-full bg-white/15" />
+                      <span>{exp.location}</span>
+                    </div>
+                  </div>
+                  <span
+                    className={`shrink-0 text-[11px] tracking-[0.15em] uppercase font-medium px-4 py-1.5 rounded-full border ${
+                      exp.current
+                        ? "bg-[var(--color-accent-muted)] border-[var(--color-accent)]/20 text-[var(--color-accent)]"
+                        : "bg-white/[0.03] border-white/[0.06] text-white/35"
+                    }`}
+                  >
+                    {exp.period}
+                  </span>
                 </div>
-              </div>
-              <div className="shrink-0 bg-white/10 px-4 py-2 rounded-full border border-white/10 text-xs font-semibold tracking-widest uppercase h-max flex items-center gap-2">
-                 Jun 2024 - July 2024
-              </div>
-            </div>
 
-            <ul className="space-y-4 text-white/70 leading-relaxed font-light text-sm md:text-base pl-2 list-disc ml-4">
-              <li>
-                Built AI-powered invoice extraction microservice using Python, Flask, OpenCV, Tesseract OCR, spaCy achieving 84% accuracy on diverse invoice formats.
-              </li>
-              <li>
-                Designed 4-stage processing pipeline (preprocessing, OCR, NER-based extraction, validation) with 4s processing time per document.
-              </li>
-              <li>
-                Extracted critical fields (invoice numbers, vendor names, dates, amounts) using hybrid approach combining regex patterns and custom-trained Named Entity Recognition models.
-              </li>
-            </ul>
-          </div>
-
-          {/* Experience Item 2 */}
-          <div className="w-full relative py-6 px-5 md:py-8 md:px-10 rounded-2xl md:rounded-3xl bg-[#1a1a1a] border border-white/5 shadow-2xl">
-            <span className="absolute -left-[29px] md:-left-[70px] top-10 md:top-12 w-3 h-3 md:w-4 md:h-4 rounded-full bg-white/20 border-[3px] md:border-4 border-[#121212]"></span>
-            <div className="flex flex-col md:flex-row md:items-start justify-between mb-8 gap-4">
-              <div>
-                <h3 className="text-xl md:text-3xl font-bold tracking-tight mb-2">Software Development Intern</h3>
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 text-sm text-white/60 font-medium">
-                  <span className="flex items-center gap-2"><span className="w-4 h-4 rounded bg-white/10 grid place-items-center">🏢</span> ICtrlBiz Consulting</span>
-                  <span className="hidden md:block w-1 h-1 rounded-full bg-white/20"></span>
-                  <span className="flex items-center gap-2">📍 Noida, India</span>
-                </div>
+                {/* Bullets */}
+                <ul className="space-y-3 text-white/40 leading-relaxed font-light text-[14px] md:text-[15px]">
+                  {exp.bullets.map((bullet, bIdx) => (
+                    <li key={bIdx} className="flex gap-3">
+                      <span className="mt-2 w-1 h-1 rounded-full bg-white/20 shrink-0" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="shrink-0 bg-white/5 px-4 py-2 rounded-full border border-white/10 text-xs font-semibold tracking-widest uppercase h-max flex items-center gap-2 text-white/60">
-                 Aug 2023 - Dec 2023
-              </div>
-            </div>
-
-            <ul className="space-y-4 text-white/70 leading-relaxed font-light text-sm md:text-base pl-2 list-disc ml-4">
-              <li>
-                Developed a CRM and Lead Management System using React.js, Supabase, PostgreSQL, Tailwind CSS with drag-and-drop pipeline managing 500+ leads.
-              </li>
-              <li>
-                Implemented secure multi-user authentication, real-time analytics dashboard, and meeting scheduler achieving 95+ Lighthouse score.
-              </li>
-              <li>
-                Built responsive UI with advanced filtering, CSV export, and automated workflow features improving team efficiency by 40%.
-              </li>
-            </ul>
-          </div>
+            </motion.div>
+          ))}
         </div>
-
       </div>
     </section>
   );
