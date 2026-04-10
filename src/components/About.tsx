@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 
 const STATS = [
   { value: "3", label: "Internships" },
@@ -17,13 +16,7 @@ export default function About() {
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 md:gap-16">
         {/* Left — Header + Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="lg:col-span-2 flex flex-col"
-        >
+        <div className="lg:col-span-2 flex flex-col">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] mb-8">
             About <span className="text-white/35">Me</span>
           </h2>
@@ -33,15 +26,9 @@ export default function About() {
             {STATS.map((stat, idx) => (
               <React.Fragment key={idx}>
                 <div className="text-center">
-                  <motion.p
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 + 0.3, duration: 0.5 }}
-                    className="text-2xl md:text-3xl font-bold tracking-tight text-white/90"
-                  >
+                  <p className="text-2xl md:text-3xl font-bold tracking-tight text-white/90">
                     {stat.value}
-                  </motion.p>
+                  </p>
                   <p className="text-[10px] md:text-[11px] tracking-[0.15em] uppercase text-white/30 mt-1.5 font-medium">
                     {stat.label}
                   </p>
@@ -52,16 +39,10 @@ export default function About() {
               </React.Fragment>
             ))}
           </div>
-        </motion.div>
+        </div>
 
         {/* Right — Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, delay: 0.15 }}
-          className="lg:col-span-3 flex flex-col justify-center"
-        >
+        <div className="lg:col-span-3 flex flex-col justify-center">
           <div className="space-y-5 text-white/45 leading-[1.8] font-light text-[15px] md:text-base">
             <p>
               I am an aspiring Software Engineer and Computer Science graduate from Vellore Institute of Technology. However, I am not just into designing applications—I am a tech enthusiast and tech savvy with a strong foundation in both software engineering and business logic.
@@ -76,7 +57,7 @@ export default function About() {
               A constant learner, I aim to merge data-driven insights with beautiful UX, taking on any challenge in the tech orbit.
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

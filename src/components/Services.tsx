@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 
 const SERVICES_DATA = [
   {
@@ -34,15 +33,6 @@ const SERVICES_DATA = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const },
-  }),
-};
-
 export default function Services() {
   return (
     <section
@@ -51,13 +41,7 @@ export default function Services() {
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-20">
         {/* Left Column */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="md:w-1/3 flex flex-col items-start md:sticky md:top-32 md:self-start"
-        >
+        <div className="md:w-1/3 flex flex-col items-start md:sticky md:top-32 md:self-start">
           <span className="text-[11px] tracking-[0.2em] uppercase text-white/35 font-medium border border-white/8 rounded-full px-4 py-1.5 mb-6 bg-white/[0.02]">
             Core Capabilities
           </span>
@@ -67,18 +51,13 @@ export default function Services() {
           <p className="text-white/45 text-base md:text-lg font-light leading-relaxed">
             I blend deep technical expertise with a strong product mindset. Not just a developer—a tech enthusiast who understands business, product, and intelligent design.
           </p>
-        </motion.div>
+        </div>
 
         {/* Right Column — Cards */}
         <div className="md:w-2/3 flex flex-col gap-4">
           {SERVICES_DATA.map((service, idx) => (
-            <motion.div
+            <div
               key={idx}
-              custom={idx}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
               className="group relative p-6 md:p-8 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] transition-all duration-500 flex flex-col md:flex-row gap-4 md:gap-6 items-start"
             >
               {/* Number */}
@@ -95,7 +74,7 @@ export default function Services() {
                 </p>
                 <div className="flex flex-wrap gap-2 mt-1">
                   {service.tags.map((tag, tIdx) => (
-                    <span
+                     <span
                       key={tIdx}
                       className="text-[11px] tracking-wider uppercase px-3 py-1 rounded-full bg-white/[0.04] text-white/40 border border-white/[0.06]"
                     >
@@ -104,7 +83,7 @@ export default function Services() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

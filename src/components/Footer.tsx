@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -19,12 +18,7 @@ export default function Footer() {
       />
 
       <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-        >
+        <div>
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-[-0.03em] mb-6">
             Let&apos;s Work{" "}
             <span className="text-white/70">Together</span>
@@ -55,7 +49,7 @@ export default function Footer() {
               </svg>
             </a>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Bottom bar */}

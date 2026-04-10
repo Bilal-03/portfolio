@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 
 const EXPERIENCES = [
   {
@@ -50,30 +49,20 @@ export default function Experience() {
     >
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14 md:mb-20"
-        >
+        <div className="text-center mb-14 md:mb-20">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] mb-5">
             Professional <span className="text-white/35">Experience</span>
           </h2>
           <span className="inline-block text-[11px] tracking-[0.2em] uppercase text-white/35 font-medium border border-white/8 rounded-full px-5 py-2 bg-white/[0.02]">
             My Career Journey
           </span>
-        </motion.div>
+        </div>
 
         {/* Timeline */}
         <div className="relative pl-6 md:pl-10 border-l border-white/[0.06]">
           {EXPERIENCES.map((exp, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: idx * 0.15, duration: 0.6, ease: [0.25, 0.4, 0.25, 1] as const }}
               className={`relative pb-12 ${idx === EXPERIENCES.length - 1 ? "pb-0" : ""}`}
             >
               {/* Timeline dot */}
@@ -120,7 +109,7 @@ export default function Experience() {
                   ))}
                 </ul>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

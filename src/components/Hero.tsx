@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 const container = {
   hidden: {},
   show: {
-    transition: { staggerChildren: 0.15, delayChildren: 0.3 },
+    transition: { staggerChildren: 0.12, delayChildren: 0.2 },
   },
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] as const } },
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 export default function Hero() {
@@ -63,7 +63,7 @@ export default function Hero() {
       {/* Noise overlay */}
       <div className="noise-overlay absolute inset-0 z-[1] pointer-events-none" />
 
-      {/* Content */}
+      {/* Content — only initial page load animation, no scroll-based */}
       <motion.div
         variants={container}
         initial="hidden"
@@ -123,12 +123,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2"
-      >
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
         <span className="text-[10px] tracking-[0.2em] uppercase text-white/25 font-medium">Scroll</span>
         <div className="w-5 h-8 rounded-full border border-white/15 flex items-start justify-center p-1">
           <motion.div
@@ -137,7 +132,7 @@ export default function Hero() {
             className="w-1 h-1.5 rounded-full bg-white/40"
           />
         </div>
-      </motion.div>
+      </div>
 
       {/* Bottom fade */}
       <div
