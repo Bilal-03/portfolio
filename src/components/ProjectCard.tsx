@@ -24,9 +24,6 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
       <DemoPlayback
         poster={project.image}
         alt={project.title}
-        video={project.video}
-        frames={project.frames}
-        frameCount={project.frameCount}
         className={featured ? "aspect-[16/11]" : "aspect-[16/10]"}
       />
 

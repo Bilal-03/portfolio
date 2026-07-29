@@ -81,25 +81,6 @@ body {
 }
 
 /* ─── Hero ─── */
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes float-subtle {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-
 @keyframes line-grow {
   from {
     transform: scaleX(0);
@@ -125,13 +106,6 @@ body {
   animation: line-grow 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.marquee-track {
-  animation: marquee 30s linear infinite;
-}
-
-.animate-fade-up {
-  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
 
 /* ─── Section divider ─── */
 .section-divider {

@@ -8,11 +8,6 @@ export interface Project {
   outcome: string;
   tags: string[];
   year: string;
-  /** Optional video for hover playback */
-  video?: string;
-  /** Optional frame sequence directory for hover playback */
-  frames?: string;
-  frameCount?: number;
 }
 
 export const PROJECTS: Project[] = [
@@ -49,7 +44,5 @@ export const PROJECTS: Project[] = [
     outcome: "Marketplace, end to end",
     tags: ["Next.js", "React", "Supabase"],
     year: "2024",
-    frames: "/sequence",
-    frameCount: 192,
   },
 ];
