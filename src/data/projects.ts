@@ -36,6 +36,18 @@ export const PROJECTS: Project[] = [
     year: "2024",
   },
   {
+    title: "Yatra AI — India Travel Planner",
+    category: "AI Travel Platform",
+    description:
+      "AI-powered travel planner that creates personalized India itineraries, helping travelers turn ideas into practical journeys.",
+    image: "/yatra-ai.svg",
+    link: "https://ai-travel-planner-india-seven.vercel.app",
+    source: "https://github.com/Bilal-03/ai-travel-planner-india",
+    outcome: "Personalized trip planning",
+    tags: ["Next.js", "AI", "Travel Planning"],
+    year: "2025",
+  },
+  {
     title: "CRM — Lead Management",
     category: "Full-Stack Application",
     description:

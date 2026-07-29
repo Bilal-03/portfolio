@@ -52,8 +52,15 @@ export default function Projects() {
             <ProjectCard project={featured} featured />
           </div>
 
-          {rest.map((project) => (
-            <div key={project.title} className="reveal">
+          {rest.map((project, index) => (
+            <div
+              key={project.title}
+              className={`reveal ${
+                rest.length % 2 === 1 && index === rest.length - 1
+                  ? "lg:col-span-2"
+                  : ""
+              }`}
+            >
               <ProjectCard project={project} />
             </div>
           ))}

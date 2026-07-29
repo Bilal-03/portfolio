@@ -1,0 +1,23 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#07110F"/>
+  <circle cx="1290" cy="105" r="385" fill="#0D4E40" fill-opacity=".44"/>
+  <circle cx="130" cy="910" r="390" fill="#6B4821" fill-opacity=".27"/>
+  <rect x="142" y="116" width="1316" height="770" rx="30" fill="#0C1A16" stroke="#285D4C" stroke-width="2"/>
+  <rect x="142" y="116" width="1316" height="82" rx="30" fill="#10261F"/>
+  <circle cx="197" cy="157" r="9" fill="#61D8AF"/><circle cx="227" cy="157" r="9" fill="#386A5D"/><circle cx="257" cy="157" r="9" fill="#386A5D"/>
+  <text x="315" y="166" fill="#CDEDE0" font-family="Arial, sans-serif" font-size="23" letter-spacing="5">YATRA AI</text>
+  <text x="214" y="288" fill="#79E2BE" font-family="Arial, sans-serif" font-size="18" letter-spacing="4">PLAN YOUR INDIA JOURNEY</text>
+  <text x="214" y="365" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">Where will your next</text>
+  <text x="214" y="424" fill="white" font-family="Arial, sans-serif" font-size="48" font-weight="bold">story begin?</text>
+  <rect x="214" y="484" width="700" height="92" rx="16" fill="#15382E" stroke="#328D70"/>
+  <text x="250" y="541" fill="#EAFBF4" font-family="Arial, sans-serif" font-size="24">Explore a 7-day Rajasthan adventure</text>
+  <circle cx="860" cy="530" r="25" fill="#58D5A9"/><path d="M850 530H870M861 521L870 530L861 539" stroke="#0A2119" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="1005" y="252" width="316" height="496" rx="21" fill="#123126" stroke="#2D745F"/>
+  <path d="M1042 649C1102 545 1073 413 1165 338C1230 286 1279 350 1251 405C1225 458 1165 489 1177 547C1190 611 1256 624 1283 672" stroke="#6DE0B9" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="1165" cy="338" r="18" fill="#F2B45B"/><circle cx="1070" cy="536" r="18" fill="#F2B45B"/><circle cx="1283" cy="672" r="18" fill="#F2B45B"/>
+  <rect x="1035" y="273" width="127" height="35" rx="17.5" fill="#235342"/><text x="1055" y="297" fill="#9BE7CC" font-family="Arial, sans-serif" font-size="15">YOUR ROUTE</text>
+  <rect x="214" y="670" width="224" height="91" rx="16" fill="#10261F"/><text x="241" y="713" fill="#75DEBA" font-family="Arial, sans-serif" font-size="16">DISCOVER</text><text x="241" y="746" fill="white" font-family="Arial, sans-serif" font-size="22">Local gems</text>
+  <rect x="462" y="670" width="224" height="91" rx="16" fill="#10261F"/><text x="489" y="713" fill="#75DEBA" font-family="Arial, sans-serif" font-size="16">CURATE</text><text x="489" y="746" fill="white" font-family="Arial, sans-serif" font-size="22">Day by day</text>
+  <rect x="710" y="670" width="224" height="91" rx="16" fill="#10261F"/><text x="737" y="713" fill="#75DEBA" font-family="Arial, sans-serif" font-size="16">EXPLORE</text><text x="737" y="746" fill="white" font-family="Arial, sans-serif" font-size="22">With confidence</text>
+  <text x="214" y="835" fill="#65D8AF" font-family="Arial, sans-serif" font-size="26" letter-spacing="5">YATRA AI · TRAVEL, REIMAGINED</text>
+</svg>
