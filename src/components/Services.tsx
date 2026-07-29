@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import { useEffect, useRef } from "react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const SERVICES_DATA = [
   {
@@ -34,57 +35,80 @@ const SERVICES_DATA = [
 ];
 
 export default function Services() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.querySelectorAll(".reveal").forEach((node, i) => {
+            (node as HTMLElement).style.transitionDelay = `${i * 80}ms`;
+            node.classList.add("is-visible");
+          });
+        }
+      },
+      { threshold: 0.08 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="services"
-      className="relative bg-[#0a0a0b] text-white py-20 md:py-32 px-6 md:px-12 lg:px-24"
+      className="relative py-24 md:py-36 px-6 md:px-12 lg:px-20"
     >
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 md:gap-20">
-        {/* Left Column */}
-        <div className="md:w-1/3 flex flex-col items-start md:sticky md:top-32 md:self-start">
-          <span className="text-[11px] tracking-[0.2em] uppercase text-white/35 font-medium border border-white/8 rounded-full px-4 py-1.5 mb-6 bg-white/[0.02]">
-            Core Capabilities
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] mb-6 leading-[1.05]">
-            What <span className="text-white/40">I Do</span>
-          </h2>
-          <p className="text-white/45 text-base md:text-lg font-light leading-relaxed">
-            I blend deep technical expertise with a strong product mindset. Not just a developer—a tech enthusiast who understands business, product, and intelligent design.
-          </p>
-        </div>
+      <div className="section-divider max-w-6xl mx-auto mb-24 md:mb-36" />
 
-        {/* Right Column — Cards */}
-        <div className="md:w-2/3 flex flex-col gap-4">
-          {SERVICES_DATA.map((service, idx) => (
-            <div
-              key={idx}
-              className="group relative p-6 md:p-8 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] transition-all duration-500 flex flex-col md:flex-row gap-4 md:gap-6 items-start"
-            >
-              {/* Number */}
-              <span className="text-white/15 font-mono text-sm tracking-widest font-bold pt-0.5 group-hover:text-[var(--color-accent)] transition-colors duration-500 shrink-0">
-                {service.num}
-              </span>
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          <div className="lg:col-span-4 lg:sticky lg:top-32 lg:self-start reveal">
+            <SectionHeader
+              index="01"
+              label="Capabilities"
+              title="What I"
+              highlight="Do"
+              description="Deep technical expertise paired with a strong product mindset — not just a developer, but a tech enthusiast who understands business and design."
+            />
+          </div>
 
-              <div className="flex flex-col gap-3">
-                <h3 className="text-xl md:text-2xl font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-white/45 leading-relaxed font-light text-[15px] max-w-2xl">
-                  {service.description}
-                </p>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {service.tags.map((tag, tIdx) => (
-                     <span
-                      key={tIdx}
-                      className="text-[11px] tracking-wider uppercase px-3 py-1 rounded-full bg-white/[0.04] text-white/40 border border-white/[0.06]"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+          <div className="lg:col-span-8 flex flex-col gap-3">
+            {SERVICES_DATA.map((service) => (
+              <div
+                key={service.num}
+                className="reveal group card-glow p-6 md:p-7 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-hover)] transition-all duration-500"
+              >
+                <div className="flex gap-5 md:gap-6">
+                  <span className="text-[11px] font-mono text-[var(--color-accent)] pt-1 shrink-0">
+                    {service.num}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg md:text-xl font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mb-2 group-hover:text-white transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm md:text-[15px] text-[var(--color-text-secondary)] font-light leading-relaxed mb-4">
+                      {service.description}
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {service.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-mono px-2.5 py-1 rounded-md bg-white/[0.03] text-[var(--color-text-tertiary)] border border-white/[0.05]"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

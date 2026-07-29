@@ -1,61 +1,79 @@
 "use client";
 
-import React from "react";
+import { useEffect, useRef } from "react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const STATS = [
   { value: "3", label: "Internships" },
-  { value: "7.5", label: "BTech CGPA" },
+  { value: "84%", label: "OCR accuracy" },
   { value: "10+", label: "Projects Built" },
 ];
 
 export default function About() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.querySelectorAll(".reveal").forEach((node, i) => {
+            (node as HTMLElement).style.transitionDelay = `${i * 100}ms`;
+            node.classList.add("is-visible");
+          });
+        }
+      },
+      { threshold: 0.08 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="about"
-      className="relative bg-[#0a0a0b] text-white py-20 md:py-32 px-6 md:px-12 lg:px-24 border-t border-white/[0.04]"
+      className="relative py-24 md:py-36 px-6 md:px-12 lg:px-20"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-12 md:gap-16">
-        {/* Left — Header + Stats */}
-        <div className="lg:col-span-2 flex flex-col">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] mb-8">
-            About <span className="text-white/35">Me</span>
-          </h2>
+      <div className="section-divider max-w-6xl mx-auto mb-24 md:mb-36" />
 
-          {/* Stats */}
-          <div className="flex items-center gap-6 md:gap-8 p-5 md:p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)]">
-            {STATS.map((stat, idx) => (
-              <React.Fragment key={idx}>
-                <div className="text-center">
-                  <p className="text-2xl md:text-3xl font-bold tracking-tight text-white/90">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="reveal">
+            <SectionHeader index="04" label="Profile" title="About" highlight="Me" />
+
+            <div className="grid grid-cols-3 gap-4 mt-8">
+              {STATS.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="p-4 md:p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] text-center"
+                >
+                  <p className="text-2xl md:text-3xl font-semibold tracking-tight text-[var(--color-text-primary)]">
                     {stat.value}
                   </p>
-                  <p className="text-[10px] md:text-[11px] tracking-[0.15em] uppercase text-white/30 mt-1.5 font-medium">
+                  <p className="text-[10px] font-mono tracking-[0.12em] uppercase text-[var(--color-text-tertiary)] mt-1.5">
                     {stat.label}
                   </p>
                 </div>
-                {idx < STATS.length - 1 && (
-                  <div className="w-px h-10 bg-white/[0.06]" />
-                )}
-              </React.Fragment>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Right — Content */}
-        <div className="lg:col-span-3 flex flex-col justify-center">
-          <div className="space-y-5 text-white/45 leading-[1.8] font-light text-[15px] md:text-base">
-            <p>
-              I am an aspiring Software Engineer and Computer Science graduate from Vellore Institute of Technology. However, I am not just into designing applications—I am a tech enthusiast and tech savvy with a strong foundation in both software engineering and business logic.
-            </p>
-            <p>
-              My technical expertise spans Python, Java, React, and Next.js, frequently culminating in AI microservices and full-stack platforms. Yet, my interests do not stop at the codebase.
-            </p>
-            <p>
-              Beyond academia and coding, I have a deep knowledge of business and product management. I am eager to work and contribute in these fields, bridging the gap between an engineering challenge and strategic product vision.
-            </p>
-            <p>
-              A constant learner, I aim to merge data-driven insights with beautiful UX, taking on any challenge in the tech orbit.
-            </p>
+          <div className="reveal flex flex-col justify-center">
+            <div className="space-y-5 text-[var(--color-text-secondary)] leading-[1.85] font-light text-[15px] md:text-base">
+              <p>
+                I&apos;m a Computer Science graduate from Vellore Institute of Technology who enjoys making difficult systems feel straightforward to use. My work sits at the intersection of engineering, automation, and product thinking.
+              </p>
+              <p>
+                From full-stack platforms to AI-powered document processing, I care about the details that make software dependable: clear interfaces, pragmatic architecture, and measurable results.
+              </p>
+              <p>
+                I bring the same curiosity to product decisions as I do to the codebase — asking what will create the most value, then building it with care.
+              </p>
+            </div>
           </div>
         </div>
       </div>

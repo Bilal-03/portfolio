@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import { useEffect, useRef } from "react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const EXPERIENCES = [
   {
@@ -24,7 +25,7 @@ const EXPERIENCES = [
     bullets: [
       "Built AI-powered invoice extraction microservice using Python, Flask, OpenCV, Tesseract OCR, spaCy achieving 84% accuracy on diverse invoice formats.",
       "Designed 4-stage processing pipeline (preprocessing, OCR, NER-based extraction, validation) with 4s processing time per document.",
-      "Extracted critical fields (invoice numbers, vendor names, dates, amounts) using hybrid approach combining regex patterns and custom-trained Named Entity Recognition models.",
+      "Extracted critical fields using hybrid approach combining regex patterns and custom-trained Named Entity Recognition models.",
     ],
   },
   {
@@ -42,69 +43,89 @@ const EXPERIENCES = [
 ];
 
 export default function Experience() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.querySelectorAll(".reveal").forEach((node, i) => {
+            (node as HTMLElement).style.transitionDelay = `${i * 100}ms`;
+            node.classList.add("is-visible");
+          });
+        }
+      },
+      { threshold: 0.08 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="experience"
-      className="relative bg-[#0a0a0b] text-white py-20 md:py-32 px-6 md:px-12 lg:px-24"
+      className="relative py-24 md:py-36 px-6 md:px-12 lg:px-20"
     >
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-14 md:mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] mb-5">
-            Professional <span className="text-white/35">Experience</span>
-          </h2>
-          <span className="inline-block text-[11px] tracking-[0.2em] uppercase text-white/35 font-medium border border-white/8 rounded-full px-5 py-2 bg-white/[0.02]">
-            My Career Journey
-          </span>
+      <div className="section-divider max-w-6xl mx-auto mb-24 md:mb-36" />
+
+      <div className="max-w-3xl mx-auto">
+        <div className="reveal">
+          <SectionHeader
+            index="05"
+            label="Career"
+            title="Work"
+            highlight="Experience"
+            align="center"
+          />
         </div>
 
-        {/* Timeline */}
-        <div className="relative pl-6 md:pl-10 border-l border-white/[0.06]">
+        <div className="relative mt-4">
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-[var(--color-border)]" />
+
           {EXPERIENCES.map((exp, idx) => (
-            <div
-              key={idx}
-              className={`relative pb-12 ${idx === EXPERIENCES.length - 1 ? "pb-0" : ""}`}
-            >
-              {/* Timeline dot */}
+            <div key={idx} className="reveal relative pl-8 pb-10 last:pb-0">
               <div
-                className={`absolute -left-[calc(1.5rem+5px)] md:-left-[calc(2.5rem+5px)] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-[#0a0a0b] ${
+                className={`absolute left-0 top-2 w-[15px] h-[15px] rounded-full border-2 border-[var(--color-background)] ${
                   exp.current
-                    ? "bg-[var(--color-accent)] shadow-[0_0_12px_rgba(99,102,241,0.4)]"
-                    : "bg-white/20"
+                    ? "bg-[var(--color-accent)] shadow-[0_0_16px_rgba(29,158,117,0.45)]"
+                    : "bg-[var(--color-surface-elevated)]"
                 }`}
               />
 
-              {/* Card */}
-              <div className="p-5 md:p-8 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-border-hover)] transition-all duration-500">
-                {/* Header Row */}
-                <div className="flex flex-col md:flex-row md:items-start justify-between gap-3 mb-6">
+              <div className="p-5 md:p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-hover)] transition-all duration-500">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-5">
                   <div>
-                    <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-2 text-white/90">
+                    <h3 className="text-lg md:text-xl font-semibold tracking-[-0.02em] text-[var(--color-text-primary)] mb-1">
                       {exp.title}
                     </h3>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 text-sm text-white/40 font-medium">
-                      <span>{exp.company}</span>
-                      <span className="hidden sm:block w-1 h-1 rounded-full bg-white/15" />
-                      <span>{exp.location}</span>
-                    </div>
+                    <p className="text-sm text-[var(--color-text-tertiary)] font-mono">
+                      {exp.company} · {exp.location}
+                    </p>
                   </div>
                   <span
-                    className={`shrink-0 text-[11px] tracking-[0.15em] uppercase font-medium px-4 py-1.5 rounded-full border ${
+                    className={`shrink-0 self-start text-[10px] font-mono tracking-wider uppercase px-3 py-1 rounded-md border ${
                       exp.current
-                        ? "bg-[var(--color-accent-muted)] border-[var(--color-accent)]/20 text-[var(--color-accent)]"
-                        : "bg-white/[0.03] border-white/[0.06] text-white/35"
+                        ? "bg-[var(--color-accent-muted)] border-[var(--color-accent)]/25 text-[var(--color-accent)]"
+                        : "bg-white/[0.02] border-[var(--color-border)] text-[var(--color-text-tertiary)]"
                     }`}
                   >
                     {exp.period}
                   </span>
                 </div>
 
-                {/* Bullets */}
-                <ul className="space-y-3 text-white/40 leading-relaxed font-light text-[14px] md:text-[15px]">
+                <ul className="space-y-2.5">
                   {exp.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex gap-3">
-                      <span className="mt-2 w-1 h-1 rounded-full bg-white/20 shrink-0" />
-                      <span>{bullet}</span>
+                    <li
+                      key={bIdx}
+                      className="flex gap-3 text-sm text-[var(--color-text-secondary)] font-light leading-relaxed"
+                    >
+                      <span className="mt-2 w-1 h-1 rounded-full bg-[var(--color-accent)]/50 shrink-0" />
+                      {bullet}
                     </li>
                   ))}
                 </ul>

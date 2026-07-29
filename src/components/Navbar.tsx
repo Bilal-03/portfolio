@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const NAV_LINKS = [
@@ -16,99 +16,103 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
     <>
-      <motion.nav
-        initial={{ y: -20, opacity: 0 }}
+      <motion.header
+        initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           scrolled
-            ? "py-3 md:py-4 bg-[#0a0a0b]/80 backdrop-blur-xl border-b border-white/[0.06]"
-            : "py-5 md:py-6 bg-transparent border-b border-transparent"
+            ? "py-3 bg-[var(--color-background)]/85 backdrop-blur-xl border-b border-[var(--color-border)]"
+            : "py-5 md:py-6 bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          {/* Logo */}
-          <a href="#hero" className="font-bold text-lg tracking-tight text-white/90 hover:text-white transition-colors">
-            bilal<span className="text-[var(--color-accent)]">.</span>
+        <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-center">
+          <a
+            href="#hero"
+            className="font-mono text-xs font-medium tracking-tight text-[var(--color-text-primary)] hover:text-[var(--color-accent-bright)] transition-colors"
+          >
+            bilal<span className="text-[var(--color-accent)]">_</span>dev
           </a>
 
-          {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-8 text-[13px] font-medium tracking-wide text-white/50">
+          <nav className="hidden md:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="hover:text-white transition-colors duration-300 py-2"
-                >
-                  {link.label}
-                </a>
-              </li>
+              <a
+                key={link.href}
+                href={link.href}
+                className="px-4 py-2 text-[13px] font-medium text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] transition-colors duration-300 rounded-lg hover:bg-white/[0.03]"
+              >
+                {link.label}
+              </a>
             ))}
-          </ul>
+          </nav>
 
-          {/* Desktop Resume Button */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden md:block">
             <a
               href="/Resume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="px-5 py-2 rounded-full border border-white/15 text-[13px] font-medium text-white/70 hover:bg-white hover:text-black hover:border-white transition-all duration-300"
+              className="text-[13px] font-semibold px-4 py-2 rounded-lg bg-[var(--color-accent)] text-[#06120e] hover:bg-[var(--color-accent-bright)] transition-all duration-300"
             >
-              Resume
+              Resume ↗
             </a>
           </div>
 
-          {/* Mobile Hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden relative flex flex-col items-center justify-center gap-[5px] w-8 h-8 z-[60]"
+            className="md:hidden relative flex flex-col items-center justify-center gap-[5px] w-8 h-8"
             aria-label="Toggle menu"
           >
             <span
-              className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${
-                menuOpen ? "rotate-45 translate-y-[6.5px]" : ""
+              className={`block w-5 h-px bg-[var(--color-text-primary)] transition-all duration-300 ${
+                menuOpen ? "rotate-45 translate-y-[6px]" : ""
               }`}
             />
             <span
-              className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${
-                menuOpen ? "opacity-0" : ""
+              className={`block w-5 h-px bg-[var(--color-text-primary)] transition-all duration-300 ${
+                menuOpen ? "opacity-0 scale-0" : ""
               }`}
             />
             <span
-              className={`block w-5 h-[1.5px] bg-white transition-all duration-300 ${
-                menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""
+              className={`block w-5 h-px bg-[var(--color-text-primary)] transition-all duration-300 ${
+                menuOpen ? "-rotate-45 -translate-y-[6px]" : ""
               }`}
             />
           </button>
         </div>
-      </motion.nav>
+      </motion.header>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-[#0a0a0b]/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 z-50 md:hidden"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 bg-[var(--color-background)]/98 backdrop-blur-2xl z-40 flex flex-col items-center justify-center gap-2 md:hidden"
           >
             {NAV_LINKS.map((link, i) => (
               <motion.a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                className="text-2xl font-semibold tracking-tight text-white/80 hover:text-white transition-colors"
+                transition={{ delay: i * 0.06 }}
+                className="text-3xl font-semibold tracking-tight text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors py-2"
               >
                 {link.label}
               </motion.a>
@@ -118,12 +122,12 @@ export default function Navbar() {
               target="_blank"
               rel="noreferrer"
               onClick={() => setMenuOpen(false)}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-4 px-8 py-3 rounded-full border border-white/20 text-sm font-semibold text-white/80 hover:bg-white hover:text-black transition-all"
+              transition={{ delay: 0.35 }}
+              className="mt-6 text-sm font-mono text-[var(--color-accent)] border border-[var(--color-accent)]/30 px-6 py-3 rounded-lg"
             >
-              Resume
+              Download Resume
             </motion.a>
           </motion.div>
         )}

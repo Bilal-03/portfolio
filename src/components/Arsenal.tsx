@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import { useEffect, useRef } from "react";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const TOOL_CATEGORIES = [
   {
@@ -8,48 +9,65 @@ const TOOL_CATEGORIES = [
     tools: ["Java", "Python", "C/C++", "JavaScript", "TypeScript"],
   },
   {
-    label: "Frameworks & Libraries",
+    label: "Frameworks",
     tools: ["React.js", "Next.js", "Flask", "Tailwind CSS", "HTML/CSS"],
   },
   {
-    label: "AI & Machine Learning",
+    label: "AI & ML",
     tools: ["TensorFlow", "Keras", "PyTorch", "OpenCV", "spaCy", "YOLO"],
   },
   {
-    label: "Infrastructure & Tools",
+    label: "Infrastructure",
     tools: ["Supabase", "PostgreSQL", "SQL", "Docker", "Git/GitHub"],
   },
 ];
 
 export default function Arsenal() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.querySelectorAll(".reveal").forEach((node, i) => {
+            (node as HTMLElement).style.transitionDelay = `${i * 60}ms`;
+            node.classList.add("is-visible");
+          });
+        }
+      },
+      { threshold: 0.08 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="relative bg-[#0a0a0b] text-white py-20 md:py-28 px-6 md:px-12 lg:px-24 border-t border-white/[0.04]">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-12 md:mb-16">
-          <span className="text-[11px] tracking-[0.2em] uppercase text-white/35 font-medium mb-3 block">
-            Technologies & Tools
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em]">
-            Arsenal
-          </h2>
+    <section ref={sectionRef} id="stack" className="relative py-24 md:py-36 px-6 md:px-12 lg:px-20">
+      <div className="section-divider max-w-6xl mx-auto mb-24 md:mb-36" />
+
+      <div className="max-w-6xl mx-auto">
+        <div className="reveal mb-14 md:mb-16">
+          <SectionHeader index="02" label="Stack" title="Tools &" highlight="Tech" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {TOOL_CATEGORIES.map((category, cIdx) => (
-            <div key={cIdx}>
-              <h3 className="text-[11px] tracking-[0.2em] uppercase text-white/30 font-medium mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {TOOL_CATEGORIES.map((category) => (
+            <div key={category.label} className="reveal p-5 md:p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] hover:border-[var(--color-border-hover)] transition-colors">
+              <div className="flex items-center gap-3 mb-5"><span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" /><h3 className="text-[10px] font-mono tracking-[0.2em] uppercase text-[var(--color-text-tertiary)]">
                 {category.label}
-              </h3>
-              <div className="flex flex-wrap gap-2.5">
-                {category.tools.map((tool, idx) => (
-                  <div
-                    key={idx}
-                    className="px-4 py-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-300 cursor-default group"
+              </h3></div>
+              <div className="flex flex-wrap gap-2">
+                {category.tools.map((tool) => (
+                  <span
+                    key={tool}
+                    className="px-3 py-1.5 rounded-md border border-white/[0.06] bg-black/10 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-accent-bright)] hover:border-[var(--color-border-hover)] transition-all duration-300 cursor-default"
                   >
-                    <span className="text-sm font-medium text-white/60 group-hover:text-white/80 transition-colors">
-                      {tool}
-                    </span>
-                  </div>
+                    {tool}
+                  </span>
                 ))}
               </div>
             </div>
