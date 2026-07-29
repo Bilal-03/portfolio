@@ -3,7 +3,7 @@ export interface Project {
   category: string;
   description: string;
   image: string;
-  link: string;
+  link?: string;
   source?: string;
   outcome: string;
   tags: string[];
@@ -11,6 +11,30 @@ export interface Project {
 }
 
 export const PROJECTS: Project[] = [
+  {
+    title: "Business RAG — Knowledge Assistant",
+    category: "AI Knowledge Platform",
+    description:
+      "Retrieval-augmented assistant that turns business documents into cited, context-aware answers for faster, more confident decisions.",
+    image: "/business-rag.svg",
+    link: "https://businessrag.vercel.app",
+    source: "https://github.com/Bilal-03/businessrag",
+    outcome: "Grounded business insights",
+    tags: ["Python", "LLMs", "Vector Search"],
+    year: "2025",
+  },
+  {
+    title: "Invoice Extraction — Document AI",
+    category: "AI Automation",
+    description:
+      "Automated invoice-processing pipeline that reads diverse document formats and extracts validated fields in seconds.",
+    image: "/invoice-extraction.svg",
+    link: "https://invoice-extraction-lac.vercel.app",
+    source: "https://github.com/Bilal-03/invoice-extraction",
+    outcome: "84% extraction accuracy",
+    tags: ["Python", "OpenCV", "Tesseract OCR", "spaCy"],
+    year: "2024",
+  },
   {
     title: "CRM — Lead Management",
     category: "Full-Stack Application",

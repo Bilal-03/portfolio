@@ -62,7 +62,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             <span className="text-[11px] font-mono text-[var(--color-accent-bright)]">↗ {project.outcome}</span>
             <div className="flex gap-3 text-[11px] font-medium">
               {project.source && <a href={project.source} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()} className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent-bright)] transition-colors">Source</a>}
-              <a href={project.link} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()} className="inline-flex items-center gap-1 text-[var(--color-text-primary)] hover:text-[var(--color-accent-bright)] transition-colors">Visit <ExternalIcon /></a>
+              {project.link && <a href={project.link} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()} className="inline-flex items-center gap-1 text-[var(--color-text-primary)] hover:text-[var(--color-accent-bright)] transition-colors">Visit <ExternalIcon /></a>}
             </div>
           </div>
         </div>
