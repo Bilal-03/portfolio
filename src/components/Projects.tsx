@@ -1,7 +1,7 @@
 import Reveal from "@/components/ui/Reveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import ProjectCard from "@/components/ProjectCard";
-import { CASE_STUDIES } from "@/data/projects";
+import { PROJECTS } from "@/data/projects";
 
 export default function Projects() {
   return (
@@ -17,7 +17,7 @@ export default function Projects() {
         </Reveal>
 
         <div className="project-grid">
-          {CASE_STUDIES.map((project, index) => (
+          {PROJECTS.map((project, index) => (
             <Reveal key={project.slug} delay={index * 80}>
               <ProjectCard project={project} index={index} />
             </Reveal>

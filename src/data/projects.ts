@@ -133,6 +133,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Connect reporting definitions directly to a documented metric glossary.",
     ],
     poster: "/project-previews/crm-pro-home.png",
+    liveUrl: "https://crm-sepia-chi-24.vercel.app",
     repoUrl: "https://github.com/Bilal-03/crm",
     year: "2023",
   },
@@ -236,6 +237,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Verify each tool's result format and data freshness before production use.",
     ],
     poster: "/project-previews/karobarkit-home.png",
+    liveUrl: "https://karobarkit.vercel.app",
+    repoUrl: "https://github.com/Bilal-03/karobarkit",
     year: "2026",
   },
   {
@@ -338,12 +341,24 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Add clearer exception ownership and audit history for payment decisions.",
     ],
     poster: "/project-previews/invoice-intelligence-home.png",
+    liveUrl: "https://invoice-extraction-lac.vercel.app",
     repoUrl: "https://github.com/Bilal-03/invoice-extraction",
     year: "2024",
   },
 ];
 
-export const PROJECTS = CASE_STUDIES;
+const PROJECT_DISPLAY_ORDER = [
+  "handovr",
+  "finassist",
+  "bizguide-ai",
+  "karobarkit",
+  "crm-pro",
+  "invoice-intelligence",
+] as const;
+
+export const PROJECTS = PROJECT_DISPLAY_ORDER.map((slug) =>
+  CASE_STUDIES.find((project) => project.slug === slug)
+).filter((project): project is CaseStudy => Boolean(project));
 
 export const EXPERIENCE = [
   {
