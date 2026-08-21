@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -15,26 +15,34 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Bilal Choudhary — Software Engineer",
+  metadataBase: new URL(siteUrl),
+  title: "Bilal Choudhary — Product, Data & Applied AI",
   description:
-    "Software Engineer and Computer Science graduate from VIT. Building scalable full-stack applications, AI-powered microservices, and beautiful digital experiences.",
+    "Bilal Choudhary turns problems and data into useful products through product thinking, analytics and AI-assisted development.",
   keywords: [
     "Bilal Choudhary",
-    "Software Engineer",
-    "Full Stack Developer",
-    "React",
-    "Next.js",
-    "Python",
-    "AI",
-    "Portfolio",
+    "Product",
+    "Data Analytics",
+    "Applied AI",
+    "Product Strategy",
+    "Business Systems",
+    "AI Products",
   ],
   authors: [{ name: "Bilal Choudhary" }],
   openGraph: {
-    title: "Bilal Choudhary — Software Engineer",
+    title: "Bilal Choudhary — Product, Data & Applied AI",
     description:
-      "Building scalable full-stack applications, AI-powered microservices, and beautiful digital experiences.",
+      "Turning user problems, business requirements and data into useful digital products.",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bilal Choudhary — Product, Data & Applied AI",
+    description:
+      "Turning user problems, business requirements and data into useful digital products.",
   },
 };
 
@@ -44,10 +52,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full`}>
-      <body className="min-h-full flex flex-col font-display antialiased grain">
-        {children}
-      </body>
+    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

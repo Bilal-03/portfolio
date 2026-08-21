@@ -1,68 +1,42 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import ProjectCard from "@/components/ProjectCard";
+import Reveal from "@/components/ui/Reveal";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { PROJECTS } from "@/data/projects";
+import ProjectCard from "@/components/ProjectCard";
+import { CASE_STUDIES } from "@/data/projects";
 
 export default function Projects() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.querySelectorAll(".reveal").forEach((node, i) => {
-            (node as HTMLElement).style.transitionDelay = `${i * 100}ms`;
-            node.classList.add("is-visible");
-          });
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const [featured, ...rest] = PROJECTS;
+  const featured = CASE_STUDIES.filter((project) => project.featured);
+  const selected = CASE_STUDIES.filter((project) => !project.featured);
 
   return (
-    <section
-      ref={sectionRef}
-      id="work"
-      className="relative py-24 md:py-36 px-6 md:px-12 lg:px-20"
-    >
-      <div className="max-w-6xl mx-auto">
-        <div className="reveal">
+    <section id="work" className="section section-work">
+      <div className="site-container">
+        <Reveal>
           <SectionHeader
-            index="03"
-            label="Portfolio"
-            title="Selected"
-            highlight="Works"
-            description="Selected products built from the interface down to the architecture. Hover to preview each experience."
+            index="02"
+            label="Selected work"
+            title="Products with a point of view."
+            description="I use product thinking, data and applied AI to turn messy workflows into clearer experiences. Explore the decisions behind each one."
           />
+        </Reveal>
+
+        <div className="project-grid project-grid-featured">
+          {featured.map((project, index) => (
+            <Reveal key={project.slug} delay={index * 80}>
+              <ProjectCard project={project} featured={index === 0} />
+            </Reveal>
+          ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
-          <div className="reveal lg:row-span-2">
-            <ProjectCard project={featured} featured />
-          </div>
+        <div className="work-subheading">
+          <span>More work</span>
+          <span className="work-subheading-line" aria-hidden="true" />
+        </div>
 
-          {rest.map((project, index) => (
-            <div
-              key={project.title}
-              className={`reveal ${
-                rest.length % 2 === 1 && index === rest.length - 1
-                  ? "lg:col-span-2"
-                  : ""
-              }`}
-            >
+        <div className="project-grid">
+          {selected.map((project, index) => (
+            <Reveal key={project.slug} delay={index * 80}>
               <ProjectCard project={project} />
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

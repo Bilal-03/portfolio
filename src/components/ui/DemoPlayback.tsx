@@ -1,127 +1,155 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 interface DemoPlaybackProps {
+  id: string;
   poster: string;
+  previewVideo?: string;
   alt: string;
+  mediaFit?: "cover" | "contain";
   className?: string;
+  priority?: boolean;
 }
 
-const SCROLL_DURATION_MS = 5000;
-
 export default function DemoPlayback({
+  id,
   poster,
+  previewVideo,
   alt,
+  mediaFit = "cover",
   className = "",
+  priority = false,
 }: DemoPlaybackProps) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollStartRef = useRef<number | null>(null);
-  const rafRef = useRef<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const manualPreviewRef = useRef(false);
+  const [isInView, setIsInView] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [isReducedMotion] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 
-  const clearPlayback = useCallback(() => {
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-    scrollStartRef.current = null;
+  useEffect(() => {
+    const element = containerRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "240px 0px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
   }, []);
 
-  const stop = useCallback(() => {
-    clearPlayback();
-    setIsPlaying(false);
-    setProgress(0);
-  }, [clearPlayback]);
-
-  const startScrollAnimation = useCallback(() => {
-    scrollStartRef.current = performance.now();
-
-    const tick = (now: number) => {
-      if (!scrollStartRef.current) return;
-      const elapsed = now - scrollStartRef.current;
-      const pct = (elapsed % SCROLL_DURATION_MS) / SCROLL_DURATION_MS;
-      setProgress(pct * 100);
-      rafRef.current = requestAnimationFrame(tick);
+  useEffect(() => {
+    const onPreviewStart = (event: Event) => {
+      const customEvent = event as CustomEvent<string>;
+      if (customEvent.detail !== id) setIsActive(false);
     };
 
-    rafRef.current = requestAnimationFrame(tick);
-  }, []);
+    window.addEventListener("portfolio:preview-start", onPreviewStart);
+    return () => window.removeEventListener("portfolio:preview-start", onPreviewStart);
+  }, [id]);
 
-  const start = useCallback(() => {
-    setIsPlaying(true);
-    startScrollAnimation();
-  }, [startScrollAnimation]);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !previewVideo) return;
 
-  useEffect(() => () => clearPlayback(), [clearPlayback]);
+    if (isActive && isInView && !isReducedMotion) {
+      void video.play().catch(() => undefined);
+    } else {
+      video.pause();
+      video.currentTime = 0;
+    }
+  }, [isActive, isInView, isReducedMotion, previewVideo]);
 
-  const scrollOffset = isPlaying ? progress : 0;
+  const startPreview = () => {
+    if (!previewVideo || isReducedMotion) return;
+    window.dispatchEvent(new CustomEvent("portfolio:preview-start", { detail: id }));
+    setIsActive(true);
+  };
+
+  const stopPreview = () => {
+    setIsActive(false);
+  };
+
+  const supportsHover = () =>
+    typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches;
+
+  const imageClass = mediaFit === "contain" ? "object-contain p-8" : "object-cover";
 
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden bg-[#0a0a0a] ${className}`}
-      onMouseEnter={start}
-      onMouseLeave={stop}
-      onFocus={start}
-      onBlur={stop}
+      className={`media-frame ${className}`}
+      onMouseEnter={() => {
+        if (supportsHover() && !manualPreviewRef.current) startPreview();
+      }}
+      onMouseLeave={() => {
+        if (supportsHover() && !manualPreviewRef.current) stopPreview();
+      }}
+      onFocusCapture={(event) => {
+        if (!(event.target as HTMLElement).closest(".preview-button")) startPreview();
+      }}
+      onBlurCapture={(event) => {
+        if (!manualPreviewRef.current && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          manualPreviewRef.current = false;
+          stopPreview();
+        }
+      }}
     >
-      <div
-        className="w-full h-full will-change-transform"
-        style={{
-          transform: isPlaying
-            ? `translateY(-${scrollOffset * 0.35}%) scale(1.12)`
-            : "translateY(0) scale(1.02)",
-          transition: isPlaying ? "none" : "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
-        }}
-      >
-        <img
-          src={poster}
-          alt={alt}
-          className="w-full h-[140%] object-cover object-top"
-          draggable={false}
+      <Image
+        src={poster}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+        className={`${imageClass} media-poster`}
+        priority={priority || id === "handovr"}
+      />
+
+      {previewVideo && isInView && (
+        <video
+          ref={videoRef}
+          src={previewVideo}
+          poster={poster}
+          muted
+          playsInline
+          loop
+          preload="none"
+          aria-label={`${alt} preview`}
+          className={`media-video ${isActive ? "is-active" : ""} ${imageClass}`}
         />
-      </div>
+      )}
 
-      {/* Vignette */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/40 via-transparent to-black/10" />
+      <div className="media-shade" aria-hidden="true" />
 
-      {/* Live indicator */}
-      <div
-        className={`absolute top-4 left-4 flex items-center gap-2 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 transition-all duration-300 ${
-          isPlaying ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
-        }`}
-      >
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75" />
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--color-accent)]" />
-        </span>
-        <span className="text-[10px] font-mono tracking-widest uppercase text-white/80">
-          Preview
-        </span>
-      </div>
-
-      {/* Progress bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white/5">
-        <div
-          className="h-full bg-[var(--color-accent)] transition-[width] duration-75 ease-linear"
-          style={{ width: isPlaying ? `${progress}%` : "0%" }}
-        />
-      </div>
-
-      {/* Hover hint */}
-      <div
-        className={`absolute bottom-4 right-4 flex items-center gap-1.5 text-[10px] font-mono tracking-wider uppercase text-white/50 transition-opacity duration-300 ${
-          isPlaying ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-          <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        Hover to preview
-      </div>
+      {previewVideo && (
+        <button
+          type="button"
+          className="preview-button"
+          onClick={() => {
+            if (isActive) {
+              manualPreviewRef.current = false;
+              stopPreview();
+            } else {
+              manualPreviewRef.current = true;
+              startPreview();
+            }
+          }}
+          aria-pressed={isActive}
+        >
+          <span className="preview-dot" aria-hidden="true" />
+          {isActive ? "Pause preview" : "Preview"}
+        </button>
+      )}
     </div>
   );
 }

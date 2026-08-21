@@ -1,6 +1,6 @@
-# Bilal Choudhary — Portfolio
+# Bilal Choudhary — Product, Data & Applied AI
 
-Personal portfolio for Bilal Choudhary, a full-stack software engineer focused on scalable products and AI automation.
+Personal portfolio for Bilal Choudhary, focused on product thinking, data analytics and AI-assisted product development.
 
 ## Stack
 
@@ -29,7 +29,20 @@ npm run start
 
 ## Project structure
 
-- `src/app` — application shell and global styles
+- `src/app` — application shell, homepage and static case-study routes
 - `src/components` — portfolio sections and UI components
-- `src/data/projects.ts` — project content
-- `public` — résumé and project preview assets
+- `src/data/projects.ts` — typed case-study content and profile data
+- `src/app/work/[slug]` — generated case-study pages for the six launch projects
+- `public/demos` — optimized, muted preview clips and posters
+- `public/Resume.pdf` — synchronized release resume
+
+## Case studies
+
+- `/work/handovr`
+- `/work/crm-pro`
+- `/work/bizguide-ai`
+- `/work/karobarkit`
+- `/work/finassist`
+- `/work/invoice-intelligence`
+
+Set `NEXT_PUBLIC_SITE_URL` in production so metadata and Open Graph URLs resolve to the deployed origin.
