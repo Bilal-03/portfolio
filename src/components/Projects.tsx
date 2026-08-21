@@ -22,7 +22,7 @@ export default function Projects() {
         <div className="project-grid project-grid-featured">
           {featured.map((project, index) => (
             <Reveal key={project.slug} delay={index * 80}>
-              <ProjectCard project={project} featured={index === 0} />
+              <ProjectCard project={project} index={index} featured={index === 0} />
             </Reveal>
           ))}
         </div>
@@ -35,7 +35,7 @@ export default function Projects() {
         <div className="project-grid">
           {selected.map((project, index) => (
             <Reveal key={project.slug} delay={index * 80}>
-              <ProjectCard project={project} />
+              <ProjectCard project={project} index={featured.length + index} />
             </Reveal>
           ))}
         </div>

@@ -4,6 +4,7 @@ import type { CaseStudy } from "@/data/projects";
 
 interface ProjectCardProps {
   project: CaseStudy;
+  index: number;
   featured?: boolean;
 }
 
@@ -13,9 +14,16 @@ const ExternalIcon = () => (
   </svg>
 );
 
-export default function ProjectCard({ project, featured = false }: ProjectCardProps) {
+export default function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
+  const projectNumber = String(index + 1).padStart(2, "0");
+
   return (
-    <article className={`project-card ${featured ? "project-card-featured" : ""}`}>
+    <article className={`project-card ${featured ? "project-card-featured" : ""}`} data-project-index={projectNumber}>
+      <div className="project-card-header">
+        <span className="project-card-index">{projectNumber}</span>
+        <span className="project-card-kind">{featured ? "Featured project" : "Case study"}</span>
+      </div>
+
       <DemoPlayback
         id={project.slug}
         poster={project.poster}
@@ -31,9 +39,12 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
           <span>{project.year}</span>
         </div>
 
-        <h3 className="project-card-title">
-          <Link href={`/work/${project.slug}`}>{project.title}</Link>
-        </h3>
+        <div className="project-card-title-row">
+          <h3 className="project-card-title">
+            <Link href={`/work/${project.slug}`}>{project.title}</Link>
+          </h3>
+          <span className="project-card-title-mark" aria-hidden="true">↗</span>
+        </div>
 
         <p className="project-card-summary">{project.summary}</p>
 

@@ -13,8 +13,14 @@ export default function About() {
       <div className="site-container">
         <div className="about-grid">
           <Reveal>
-            <div>
-              <div className="about-photo-slot" aria-hidden="true" data-photo-slot="reserved" />
+            <div className="about-intro">
+              <div className="about-identity-stamp" aria-label="Bilal Choudhary, Product, Data and Applied AI">
+                <span className="about-identity-initials" aria-hidden="true">BC</span>
+                <span className="about-identity-details">
+                  <strong>Bilal Choudhary</strong>
+                  <small>Product / Data / Applied AI</small>
+                </span>
+              </div>
               <SectionHeader
                 index="07"
                 label="About me"
@@ -47,6 +53,11 @@ export default function About() {
               </div>
             </Reveal>
           ))}
+        </div>
+
+        <div className="about-signature" aria-hidden="true">
+          <span>Bilal / 2026</span>
+          <span>Curiosity, clarity, useful things.</span>
         </div>
       </div>
     </section>

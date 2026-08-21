@@ -18,14 +18,18 @@ export default function Experience() {
         <div className="experience-list">
           {EXPERIENCE.map((experience, index) => (
             <Reveal key={`${experience.company}-${experience.title}`} delay={index * 60}>
-              <article className="experience-item">
+              <article className={`experience-item ${experience.current ? "experience-item-current" : ""}`}>
                 <div className="experience-marker" aria-hidden="true">
+                  <span className="experience-index">0{index + 1}</span>
                   <span className={experience.current ? "experience-marker-dot is-current" : "experience-marker-dot"} />
                 </div>
                 <div className="experience-content">
                   <div className="experience-heading">
                     <div>
-                      <p className="eyebrow">{experience.company}</p>
+                      <div className="experience-role-topline">
+                        <p className="eyebrow">{experience.company}</p>
+                        <span className="experience-status">{experience.current ? "Current focus" : "Earlier experience"}</span>
+                      </div>
                       <h3>{experience.title}</h3>
                     </div>
                     <div className="experience-meta">

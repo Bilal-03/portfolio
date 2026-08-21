@@ -13,6 +13,7 @@ export default function Footer() {
       <div className="site-container">
         <Reveal>
           <div className="contact-panel">
+            <div className="contact-monogram" aria-hidden="true">BC</div>
             <div className="contact-copy">
               <p className="eyebrow">10 — Contact</p>
               <h2>Let&apos;s build something useful.</h2>
@@ -52,7 +53,7 @@ export default function Footer() {
         </Reveal>
 
         <div className="footer-bottom">
-          <span>Product · Data · Applied AI</span>
+          <span>Bilal Choudhary / Product · Data · Applied AI</span>
           <span>© {new Date().getFullYear()} Bilal Choudhary</span>
         </div>
       </div>
