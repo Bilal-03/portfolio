@@ -1,11 +1,10 @@
 import Link from "next/link";
-import DemoPlayback from "@/components/ui/DemoPlayback";
+import ProjectMedia from "@/components/ui/ProjectMedia";
 import type { CaseStudy } from "@/data/projects";
 
 interface ProjectCardProps {
   project: CaseStudy;
   index: number;
-  featured?: boolean;
 }
 
 const ExternalIcon = () => (
@@ -14,23 +13,19 @@ const ExternalIcon = () => (
   </svg>
 );
 
-export default function ProjectCard({ project, index, featured = false }: ProjectCardProps) {
+export default function ProjectCard({ project, index }: ProjectCardProps) {
   const projectNumber = String(index + 1).padStart(2, "0");
 
   return (
-    <article className={`project-card ${featured ? "project-card-featured" : ""}`} data-project-index={projectNumber}>
+    <article className="project-card" data-project-index={projectNumber}>
       <div className="project-card-header">
         <span className="project-card-index">{projectNumber}</span>
-        <span className="project-card-kind">{featured ? "Featured project" : "Case study"}</span>
+        <span className="project-card-kind">Case study</span>
       </div>
 
-      <DemoPlayback
-        id={project.slug}
+      <ProjectMedia
         poster={project.poster}
-        previewVideo={project.previewVideo}
-        alt={`${project.title} product preview`}
-        mediaFit={project.mediaFit}
-        className={featured ? "project-media-featured" : ""}
+        alt={`${project.title} home page interface`}
       />
 
       <div className="project-card-body">

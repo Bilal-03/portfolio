@@ -33,7 +33,7 @@ npm run start
 - `src/components` — portfolio sections and UI components
 - `src/data/projects.ts` — typed case-study content and profile data
 - `src/app/work/[slug]` — generated case-study pages for the six launch projects
-- `public/demos` — optimized, muted preview clips and posters
+- `public/project-previews` — home page UI screenshots used for project media
 - `public/Resume.pdf` — synchronized release resume
 
 ## Case studies

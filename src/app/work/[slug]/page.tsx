@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import DemoPlayback from "@/components/ui/DemoPlayback";
+import ProjectMedia from "@/components/ui/ProjectMedia";
 import Navbar from "@/components/Navbar";
 import Reveal from "@/components/ui/Reveal";
 import { CASE_STUDIES, PROFILE } from "@/data/projects";
@@ -97,12 +97,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
 
             <Reveal delay={160}>
-              <DemoPlayback
-                id={`case-study-${project.slug}`}
+              <ProjectMedia
                 poster={project.poster}
-                previewVideo={project.previewVideo}
-                alt={`${project.title} product preview`}
-                mediaFit={project.mediaFit}
+                alt={`${project.title} home page interface`}
                 className="case-study-media"
                 priority
               />

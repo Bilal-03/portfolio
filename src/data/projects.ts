@@ -21,13 +21,10 @@ export interface CaseStudy {
   technicalNotes: string[];
   improvements: string[];
   poster: string;
-  previewVideo?: string;
-  mediaFit?: "cover" | "contain";
   liveUrl?: string;
   repoUrl?: string;
   verifiedMetrics?: VerifiedMetric[];
   year: string;
-  featured: boolean;
 }
 
 export const PROFILE = {
@@ -88,10 +85,9 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Instrument the transaction funnel and identify the largest handover drop-offs.",
       "Expand dispute and edge-case flows after observing real transactions.",
     ],
-    poster: "/handovr-web.png",
+    poster: "/project-previews/handovr-home.png",
     liveUrl: "https://handovr.in",
     year: "2026",
-    featured: true,
   },
   {
     slug: "crm-pro",
@@ -136,11 +132,9 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Add stronger permissions and audit history for business-critical changes.",
       "Connect reporting definitions directly to a documented metric glossary.",
     ],
-    poster: "/crm-web.png",
-    previewVideo: "/demos/crm-pro.mp4",
+    poster: "/project-previews/crm-pro-home.png",
     repoUrl: "https://github.com/Bilal-03/crm",
     year: "2023",
-    featured: true,
   },
   {
     slug: "bizguide-ai",
@@ -193,12 +187,10 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Make uncertainty and escalation behavior more explicit in the interface.",
       "Add document lifecycle controls for versioning and stale guidance.",
     ],
-    poster: "/business-rag.svg",
-    previewVideo: "/demos/bizguide-ai.mp4",
+    poster: "/project-previews/bizguide-ai-home.png",
     liveUrl: "https://businessrag.vercel.app",
     repoUrl: "https://github.com/Bilal-03/businessrag",
     year: "2026",
-    featured: true,
   },
   {
     slug: "karobarkit",
@@ -243,10 +235,8 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Add saved tools and recent-task shortcuts for repeat workflows.",
       "Verify each tool's result format and data freshness before production use.",
     ],
-    poster: "/demos/karobarkit-poster.jpg",
-    previewVideo: "/demos/karobarkit.mp4",
+    poster: "/project-previews/karobarkit-home.png",
     year: "2026",
-    featured: false,
   },
   {
     slug: "finassist",
@@ -291,11 +281,10 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Test calculator explanations with people who are not financially technical.",
       "Separate educational information from personalized financial advice more clearly.",
     ],
-    poster: "/finassist-web.png",
+    poster: "/project-previews/finassist-home.png",
     liveUrl: "https://vfa-9tbs.onrender.com",
     repoUrl: "https://github.com/Bilal-03/vfa",
     year: "2025",
-    featured: false,
   },
   {
     slug: "invoice-intelligence",
@@ -348,11 +337,9 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Make correction feedback reusable for future extraction improvements.",
       "Add clearer exception ownership and audit history for payment decisions.",
     ],
-    poster: "/demos/invoice-intelligence-poster.jpg",
-    previewVideo: "/demos/invoice-intelligence.mp4",
+    poster: "/project-previews/invoice-intelligence-home.png",
     repoUrl: "https://github.com/Bilal-03/invoice-extraction",
     year: "2024",
-    featured: false,
   },
 ];
 
