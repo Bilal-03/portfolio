@@ -90,6 +90,65 @@ export const CASE_STUDIES: CaseStudy[] = [
     year: "2026",
   },
   {
+    slug: "ai-business-analytics-studio",
+    title: "AI Business Analytics Studio",
+    category: "Business Intelligence · Applied AI · Data Products",
+    tags: ["Business Intelligence", "Data Workflows", "Applied AI"],
+    summary: "Turning raw business data into decisions that can be inspected and reproduced.",
+    problem:
+      "Business data often arrives as inconsistent exports, while preparation, analysis, forecasting and reporting happen across disconnected tools with little visibility into how a result was produced.",
+    users:
+      "Business operators and analysts who need to turn operational datasets into trustworthy analysis without rebuilding the workflow for every source.",
+    goal:
+      "Create one evidence-backed workspace for preparing data, exploring performance, asking grounded AI questions and publishing reproducible reports.",
+    assumptions: [
+      "Users need analytics to adapt to business meaning rather than fixed column names.",
+      "Transformations and insights are easier to trust when their source version and lineage remain visible.",
+      "AI assistance should work from bounded analytical evidence and clearly state its limitations.",
+    ],
+    decisions: [
+      "Semantic role mapping for dataset-independent analytics",
+      "Non-destructive preparation with immutable dataset versions",
+      "Evidence-linked metrics, charts, forecasts and AI insights",
+      "One workflow spanning analysis, SQL and multi-format reporting",
+    ],
+    flow: [
+      "Upload and profile a business dataset",
+      "Clean the data and confirm its semantic roles",
+      "Analyze performance, customers and products",
+      "Generate intelligence, forecasts and reproducible reports",
+    ],
+    measurementPlan: [
+      "Time from upload to analysis-ready data",
+      "Semantic mapping confirmation and readiness rate",
+      "Transformation preview-to-commit completion",
+      "Evidence coverage across generated insights",
+      "Analysis-to-report completion rate",
+    ],
+    solution:
+      "A Python-based analytics studio that connects data ingestion, preparation, business intelligence, safe AI assistance, forecasting, anomaly detection, SQL and publishing in one version-aware workflow.",
+    technicalNotes: [
+      "Python",
+      "Streamlit",
+      "Pandas",
+      "Plotly",
+      "DuckDB",
+      "Scikit-learn",
+      "SQLAlchemy",
+      "Gemini API",
+      "Docker",
+    ],
+    improvements: [
+      "Add scheduled refresh and background processing for recurring analytical workflows.",
+      "Introduce organization workspaces and real-time collaboration for teams.",
+      "Move production deployments to managed identity, metadata storage and object storage.",
+    ],
+    poster: "/project-previews/ai-business-analytics-studio-home.png",
+    liveUrl: "https://aibizanalyticsstudio.streamlit.app",
+    repoUrl: "https://github.com/Bilal-03/ai-business-analytics-studio",
+    year: "2026",
+  },
+  {
     slug: "crm-pro",
     title: "CRM Pro",
     category: "Sales Operations · Business Systems · Analytics",
@@ -349,6 +408,7 @@ export const CASE_STUDIES: CaseStudy[] = [
 
 const PROJECT_DISPLAY_ORDER = [
   "handovr",
+  "ai-business-analytics-studio",
   "finassist",
   "bizguide-ai",
   "karobarkit",
