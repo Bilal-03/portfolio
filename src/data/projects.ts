@@ -90,6 +90,65 @@ export const CASE_STUDIES: CaseStudy[] = [
     year: "2026",
   },
   {
+    slug: "productlens",
+    title: "ProductLens",
+    category: "Product Analytics · Applied AI · Data Governance",
+    tags: ["Product Analytics", "Applied AI", "Data Governance"],
+    summary: "Turning business questions into inspectable, evidence-backed product decisions.",
+    problem:
+      "Product teams often wait for an analyst to translate a question into SQL, verify the metric definition, investigate the relevant segments and turn the result into an action. Generic text-to-SQL tools can make that path faster while hiding the semantics and evidence behind the answer.",
+    users:
+      "Product managers, analysts, growth practitioners, founders and revenue teams investigating product performance.",
+    goal:
+      "Create a governed analytics workspace that moves from a plain-language question to a validated metric, read-only analysis, evidence-backed insight and next action without making the reasoning opaque.",
+    assumptions: [
+      "Users need one shared definition for metrics, dimensions and time semantics rather than dashboard-specific calculations.",
+      "AI assistance is easier to trust when planning and explanation are bounded by governed analytics and returned evidence.",
+      "Comparison periods, sample sizes, evidence IDs and caveats should stay visible when an insight informs a decision.",
+    ],
+    decisions: [
+      "Central semantic catalog for metrics, dimensions, time semantics and PII metadata",
+      "Structured Quick Answer and Deep Dive investigations backed by deterministic analytics",
+      "SQLGlot AST validation with least-privilege, read-only PostgreSQL execution",
+      "Product Pulse, Weekly Report, analytics modules and Analysis Notebook for proactive and reusable workflows",
+    ],
+    flow: [
+      "Ask a business question or open a governed analytics surface",
+      "Resolve the metric, period, filters and supported dimensions",
+      "Validate and execute a bounded read-only analysis",
+      "Inspect evidence, drivers, confidence and the recommended next action",
+    ],
+    measurementPlan: [
+      "Question-to-answer completion rate",
+      "Time from question to evidence-backed action",
+      "Evidence coverage for findings and recommendations",
+      "Deep Dive follow-up and investigation completion",
+      "Saved insight reuse and report completion",
+    ],
+    solution:
+      "A full-stack product analytics workspace that combines semantic governance, deterministic analytics, safe SQL compilation, controlled visualizations, an evidence-first Copilot, proactive anomaly detection, reports and saved analyses.",
+    technicalNotes: [
+      "Next.js",
+      "React Query",
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "SQLGlot",
+      "Plotly",
+      "Supabase / OIDC",
+      "Docker",
+    ],
+    improvements: [
+      "Connect production sources through configured tenant workspaces and expand the bounded read-only connector path.",
+      "Add scheduled refresh, alert delivery and recurring report workflows once on-demand analytics are proven in use.",
+      "Evaluate insight quality on labeled real-world questions and add team collaboration around saved notebook analyses.",
+    ],
+    poster: "/project-previews/productlens-home.png",
+    liveUrl: "https://productlens-web-six.vercel.app",
+    repoUrl: "https://github.com/Bilal-03/productlens",
+    year: "2026",
+  },
+  {
     slug: "ai-business-analytics-studio",
     title: "AI Business Analytics Studio",
     category: "Business Intelligence · Applied AI · Data Products",
@@ -408,6 +467,7 @@ export const CASE_STUDIES: CaseStudy[] = [
 
 const PROJECT_DISPLAY_ORDER = [
   "handovr",
+  "productlens",
   "ai-business-analytics-studio",
   "finassist",
   "bizguide-ai",

@@ -32,17 +32,19 @@ npm run start
 - `src/app` — application shell, homepage and static case-study routes
 - `src/components` — portfolio sections and UI components
 - `src/data/projects.ts` — typed case-study content and profile data
-- `src/app/work/[slug]` — generated case-study pages for the six launch projects
+- `src/app/work/[slug]` — generated case-study pages for the portfolio projects
 - `public/project-previews` — home page UI screenshots used for project media
 - `public/Resume.pdf` — synchronized release resume
 
 ## Case studies
 
 - `/work/handovr`
-- `/work/crm-pro`
+- `/work/productlens`
+- `/work/ai-business-analytics-studio`
+- `/work/finassist`
 - `/work/bizguide-ai`
 - `/work/karobarkit`
-- `/work/finassist`
+- `/work/crm-pro`
 - `/work/invoice-intelligence`
 
 Set `NEXT_PUBLIC_SITE_URL` in production so metadata and Open Graph URLs resolve to the deployed origin.
