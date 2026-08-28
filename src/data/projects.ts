@@ -149,6 +149,63 @@ export const CASE_STUDIES: CaseStudy[] = [
     year: "2026",
   },
   {
+    slug: "dinescope-marketplace-intelligence",
+    title: "DineScope",
+    category: "Marketplace Intelligence · Product Analytics · Data Quality",
+    tags: ["Marketplace Analytics", "Decision Intelligence", "Data Quality"],
+    summary: "Making marketplace growth opportunities visible without hiding the limits of the evidence.",
+    problem:
+      "Food-marketplace teams need to decide where to investigate next, but customer growth, market demand, cuisine opportunity and source quality are often measured in separate views. Rankings can look decisive even when they rely on small samples, inconsistent market labels or incomplete supply evidence.",
+    users:
+      "Product and Growth teams evaluating customer and marketplace opportunities, with Marketplace, Category and City Operations as adjacent decision partners.",
+    goal:
+      "Create one decision-ready workspace that connects customer behaviour, market demand, cuisine opportunity and data reliability while separating observed facts, assumptions and investigation hypotheses.",
+    assumptions: [
+      "Teams need evidence thresholds and confidence context before an opportunity enters a prioritised queue.",
+      "Repeat behaviour and cohort retention must remain separate to avoid overstating customer habit.",
+      "A marketplace recommendation is more trustworthy when missing coverage, mapping choices and source limitations are visible at the point of interpretation.",
+    ],
+    decisions: [
+      "Six connected workspaces spanning overview, customer growth, market demand, cuisine gaps, reliability and prioritisation",
+      "Equal-length comparison windows and minimum samples before markets or cuisine opportunities can lead a ranking",
+      "Additive 1/n allocation for multi-cuisine transactions with explicit reconciliation",
+      "Configurable Decision Lab with confidence discounting, evidence guardrails and aggregate-only exports",
+    ],
+    flow: [
+      "Establish the audited marketplace baseline",
+      "Investigate customer, market or cuisine signals",
+      "Review sample size, coverage, mappings and confidence",
+      "Compare priorities and export an evidence-backed decision brief",
+    ],
+    measurementPlan: [
+      "Time from opening the workspace to a prioritised investigation",
+      "Share of ranked opportunities that pass evidence thresholds",
+      "Follow-through from overview signals into deeper analysis",
+      "Decision Lab scenario comparison and brief export rate",
+      "Metric reconciliation, mapping coverage and data-quality test pass rate",
+    ],
+    solution:
+      "A public, aggregate-only marketplace intelligence platform that turns 150,281 source rows into audited customer, demand and cuisine workflows, then keeps validity rules, confidence and evidence boundaries beside every decision signal.",
+    technicalNotes: [
+      "Python 3.11",
+      "Streamlit",
+      "Pandas",
+      "NumPy",
+      "Altair",
+      "Aggregate JSON",
+      "Python unittest / Streamlit AppTest",
+    ],
+    improvements: [
+      "Validate the prioritisation workflow with Product, Growth and Marketplace practitioners using real investigation tasks.",
+      "Add durable, permissioned team sharing for Decision Lab scenarios when collaboration becomes a proven need.",
+      "Connect a stronger operational source before adding delivery, cancellation, profitability or causal-lift metrics.",
+    ],
+    poster: "/project-previews/dinescope-home.png",
+    liveUrl: "https://dinescope-marketplace-intelligence.streamlit.app",
+    repoUrl: "https://github.com/Bilal-03/dinescope-marketplace-intelligence",
+    year: "2026",
+  },
+  {
     slug: "ai-business-analytics-studio",
     title: "AI Business Analytics Studio",
     category: "Business Intelligence · Applied AI · Data Products",
@@ -468,6 +525,7 @@ export const CASE_STUDIES: CaseStudy[] = [
 const PROJECT_DISPLAY_ORDER = [
   "handovr",
   "productlens",
+  "dinescope-marketplace-intelligence",
   "ai-business-analytics-studio",
   "finassist",
   "bizguide-ai",
