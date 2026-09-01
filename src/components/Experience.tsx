@@ -5,45 +5,36 @@ import { EXPERIENCE } from "@/data/projects";
 export default function Experience() {
   return (
     <section id="experience" className="section">
-      <div className="site-container narrow-container">
+      <div className="site-container">
         <Reveal>
           <SectionHeader
             index="06"
-            label="Experience"
-            title="Work shaped by products and operations."
-            description="Roles where I translated business needs into clearer workflows, useful products and better ways of working."
+            label="Work Experience"
+            title="Translating business ambiguity into structured systems."
+            description="Track record across product management, startup building (0-to-1 marketplace), enterprise AI automation, and business operations."
           />
         </Reveal>
 
-        <div className="experience-list">
-          {EXPERIENCE.map((experience, index) => (
-            <Reveal key={`${experience.company}-${experience.title}`} delay={index * 60}>
-              <article className={`experience-item ${experience.current ? "experience-item-current" : ""}`}>
-                <div className="experience-marker" aria-hidden="true">
-                  <span className="experience-index">0{index + 1}</span>
-                  <span className={experience.current ? "experience-marker-dot is-current" : "experience-marker-dot"} />
+        <div className="experience-timeline">
+          {EXPERIENCE.map((exp, index) => (
+            <Reveal key={`${exp.company}-${exp.title}`} delay={index * 80}>
+              <div className="experience-card">
+                <div className="experience-meta">
+                  <span className="experience-period">{exp.period}</span>
+                  <span className="experience-badge">{exp.badge}</span>
+                  <div className="experience-company">{exp.company}</div>
+                  <div className="experience-location">{exp.location}</div>
                 </div>
+
                 <div className="experience-content">
-                  <div className="experience-heading">
-                    <div>
-                      <div className="experience-role-topline">
-                        <p className="eyebrow">{experience.company}</p>
-                        <span className="experience-status">{experience.current ? "Current focus" : "Earlier experience"}</span>
-                      </div>
-                      <h3>{experience.title}</h3>
-                    </div>
-                    <div className="experience-meta">
-                      <span>{experience.period}</span>
-                      <span>{experience.location}</span>
-                    </div>
-                  </div>
-                  <ul>
-                    {experience.bullets.map((bullet) => (
+                  <h3 className="experience-title">{exp.title}</h3>
+                  <ul className="experience-bullets">
+                    {exp.bullets.map((bullet) => (
                       <li key={bullet}>{bullet}</li>
                     ))}
                   </ul>
                 </div>
-              </article>
+              </div>
             </Reveal>
           ))}
         </div>

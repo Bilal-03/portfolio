@@ -4,10 +4,14 @@ export interface VerifiedMetric {
   source: string;
 }
 
+export type PrimaryCategory = "analytics" | "product" | "ai";
+
 export interface CaseStudy {
   slug: string;
   title: string;
   category: string;
+  primaryCategory: PrimaryCategory;
+  categoryLabel: string;
   tags: string[];
   summary: string;
   problem: string;
@@ -25,29 +29,114 @@ export interface CaseStudy {
   repoUrl?: string;
   verifiedMetrics?: VerifiedMetric[];
   year: string;
+  featured?: boolean;
+}
+
+export interface RolePerspective {
+  id: "pm" | "analytics" | "ai";
+  label: string;
+  badge: string;
+  headline: string;
+  description: string;
+  highlights: string[];
+  recommendedSlugs: string[];
 }
 
 export const PROFILE = {
   name: "Bilal Choudhary",
-  eyebrow: "Product · Data · Applied AI",
-  headline: "I turn problems and data into useful products.",
+  eyebrow: "Product · Data Analytics · Applied AI",
+  headline: "I turn messy problems and complex data into useful products.",
   subheadline:
-    "Product thinking, analytics and AI-assisted development — from understanding the problem to designing and building the solution.",
+    "Product manager & analytics practitioner with a computer science background in AI/ML. Experienced in 0-to-1 product discovery, SQL decision engines, marketplace growth economics, and applied AI systems.",
   location: "Based in India",
-  availability: "Open to Product & Analytics opportunities",
+  availability: "Open to Product Management, Analytics & Strategy roles",
   email: "bilal3512@gmail.com",
   linkedin: "https://www.linkedin.com/in/bilal2012/",
   github: "https://github.com/Bilal-03",
   resume: "/Resume.pdf",
 };
 
+export const IMPACT_METRICS = [
+  {
+    value: "30,336+",
+    label: "Listings Modeled",
+    detail: "Zomato dining & delivery dataset analyzed across Bangalore micro-markets",
+    badge: "Marketplace Intelligence",
+  },
+  {
+    value: "10",
+    label: "Production Systems",
+    detail: "Full-stack apps, analytics studios, and AI workflows engineered & deployed",
+    badge: "Applied AI & Engineering",
+  },
+  {
+    value: "0-to-1",
+    label: "Marketplace Built",
+    detail: "Handovr: 16-point verified transaction flow, pricing context & escrow UX",
+    badge: "Product Management",
+  },
+  {
+    value: "5.8x",
+    label: "Engagement Uplift",
+    detail: "Quantified feature adoption flywheel (dual-feature vs offline venues)",
+    badge: "Strategy & ROI",
+  },
+];
+
+export const ROLE_PERSPECTIVES: RolePerspective[] = [
+  {
+    id: "pm",
+    label: "Product Manager",
+    badge: "0-to-1 Product & Growth",
+    headline: "Framing user problems, driving product discovery, and shipping high-leverage solutions.",
+    description:
+      "I bridge customer pain points, marketplace dynamics, and technical execution — from initial user journey mapping and PRDs to trust mechanisms, verification flows, and metric-driven iteration.",
+    highlights: [
+      "0-to-1 verified marketplace product architect (Handovr)",
+      "Outcome-oriented PRDs, user journey mapping & wireframing",
+      "Feature prioritization (RICE/Kano) & unit economics modeling",
+    ],
+    recommendedSlugs: ["handovr", "crm-pro", "karobarkit", "finassist"],
+  },
+  {
+    id: "analytics",
+    label: "Data & Strategy Analyst",
+    badge: "Marketplace & Decision Analytics",
+    headline: "Uncovering growth white spaces and translating empirical data into executive strategy.",
+    description:
+      "I turn multi-thousand row datasets into actionable SQL suites, composite opportunity indices, cohort retention models, and executive strategy memos that de-risk business bets.",
+    highlights: [
+      "30,336 venue dataset modeled with composite Market Opportunity Index",
+      "Production SQL suites (CTEs, Window Functions, Partitions, NTILEs)",
+      "Cohort economics & feature flywheel ROI quantification",
+    ],
+    recommendedSlugs: ["zomato-restaurant-intelligence", "dinescope-marketplace-intelligence", "ai-business-analytics-studio"],
+  },
+  {
+    id: "ai",
+    label: "Applied AI Builder",
+    badge: "Applied AI & Technical Prototyping",
+    headline: "Architecting document intelligence, RAG workflows, and predictive ML engines.",
+    description:
+      "With a B.Tech in CS (AI & Machine Learning), I build and deploy production-grade LLM applications, document extraction pipelines, and interactive predictive simulators.",
+    highlights: [
+      "Governed product analytics copilot & SQLGlot AST validation (ProductLens)",
+      "Multi-agent RAG & compliance guidance workspace (BizGuide AI)",
+      "Document OCR & AP invoice extraction pipelines (Invoice Intelligence)",
+    ],
+    recommendedSlugs: ["productlens", "bizguide-ai", "invoice-intelligence"],
+  },
+];
+
 export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "handovr",
     title: "Handovr",
-    category: "Marketplace · Trust & Safety",
-    tags: ["Marketplace", "Trust & Safety", "Operations"],
-    summary: "Making second-hand phone transactions clearer and safer.",
+    category: "Marketplace · Trust & Safety · Operations",
+    primaryCategory: "product",
+    categoryLabel: "0-to-1 Product",
+    tags: ["0-to-1 Product", "Marketplace", "Trust & Safety"],
+    summary: "Making second-hand phone transactions clearer, verified, and safer from listing to doorstep.",
     problem:
       "Buying a used phone means navigating uncertainty around device condition, pricing, payment and the final handover.",
     users: "People buying or selling second-hand phones across Delhi NCR.",
@@ -79,7 +168,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     solution:
       "A full-stack verified marketplace that connects discovery, device checks, pricing context and transaction handling in one product journey.",
-    technicalNotes: ["Next.js", "React", "Supabase"],
+    technicalNotes: ["Next.js", "React", "Supabase", "TypeScript"],
     improvements: [
       "Validate which trust signals influence buyer decisions most.",
       "Instrument the transaction funnel and identify the largest handover drop-offs.",
@@ -88,12 +177,15 @@ export const CASE_STUDIES: CaseStudy[] = [
     poster: "/project-previews/handovr-home.png",
     liveUrl: "https://handovr.in",
     year: "2026",
+    featured: true,
   },
   {
     slug: "productlens",
     title: "ProductLens",
     category: "Product Analytics · Applied AI · Data Governance",
-    tags: ["Product Analytics", "Applied AI", "Data Governance"],
+    primaryCategory: "ai",
+    categoryLabel: "Applied AI",
+    tags: ["Product Analytics", "Semantic SQL", "Applied AI"],
     summary: "Turning business questions into inspectable, evidence-backed product decisions.",
     problem:
       "Product teams often wait for an analyst to translate a question into SQL, verify the metric definition, investigate the relevant segments and turn the result into an action. Generic text-to-SQL tools can make that path faster while hiding the semantics and evidence behind the answer.",
@@ -135,7 +227,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       "PostgreSQL",
       "SQLGlot",
       "Plotly",
-      "Supabase / OIDC",
+      "Supabase",
       "Docker",
     ],
     improvements: [
@@ -147,69 +239,15 @@ export const CASE_STUDIES: CaseStudy[] = [
     liveUrl: "https://productlens-web-six.vercel.app",
     repoUrl: "https://github.com/Bilal-03/productlens",
     year: "2026",
-  },
-  {
-    slug: "dinescope-marketplace-intelligence",
-    title: "DineScope",
-    category: "Marketplace Intelligence · Product Analytics · Data Quality",
-    tags: ["Marketplace Analytics", "Decision Intelligence", "Data Quality"],
-    summary: "Making marketplace growth opportunities visible without hiding the limits of the evidence.",
-    problem:
-      "Food-marketplace teams need to decide where to investigate next, but customer growth, market demand, cuisine opportunity and source quality are often measured in separate views. Rankings can look decisive even when they rely on small samples, inconsistent market labels or incomplete supply evidence.",
-    users:
-      "Product and Growth teams evaluating customer and marketplace opportunities, with Marketplace, Category and City Operations as adjacent decision partners.",
-    goal:
-      "Create one decision-ready workspace that connects customer behaviour, market demand, cuisine opportunity and data reliability while separating observed facts, assumptions and investigation hypotheses.",
-    assumptions: [
-      "Teams need evidence thresholds and confidence context before an opportunity enters a prioritised queue.",
-      "Repeat behaviour and cohort retention must remain separate to avoid overstating customer habit.",
-      "A marketplace recommendation is more trustworthy when missing coverage, mapping choices and source limitations are visible at the point of interpretation.",
-    ],
-    decisions: [
-      "Six connected workspaces spanning overview, customer growth, market demand, cuisine gaps, reliability and prioritisation",
-      "Equal-length comparison windows and minimum samples before markets or cuisine opportunities can lead a ranking",
-      "Additive 1/n allocation for multi-cuisine transactions with explicit reconciliation",
-      "Configurable Decision Lab with confidence discounting, evidence guardrails and aggregate-only exports",
-    ],
-    flow: [
-      "Establish the audited marketplace baseline",
-      "Investigate customer, market or cuisine signals",
-      "Review sample size, coverage, mappings and confidence",
-      "Compare priorities and export an evidence-backed decision brief",
-    ],
-    measurementPlan: [
-      "Time from opening the workspace to a prioritised investigation",
-      "Share of ranked opportunities that pass evidence thresholds",
-      "Follow-through from overview signals into deeper analysis",
-      "Decision Lab scenario comparison and brief export rate",
-      "Metric reconciliation, mapping coverage and data-quality test pass rate",
-    ],
-    solution:
-      "A public, aggregate-only marketplace intelligence platform that turns 150,281 source rows into audited customer, demand and cuisine workflows, then keeps validity rules, confidence and evidence boundaries beside every decision signal.",
-    technicalNotes: [
-      "Python 3.11",
-      "Streamlit",
-      "Pandas",
-      "NumPy",
-      "Altair",
-      "Aggregate JSON",
-      "Python unittest / Streamlit AppTest",
-    ],
-    improvements: [
-      "Validate the prioritisation workflow with Product, Growth and Marketplace practitioners using real investigation tasks.",
-      "Add durable, permissioned team sharing for Decision Lab scenarios when collaboration becomes a proven need.",
-      "Connect a stronger operational source before adding delivery, cancellation, profitability or causal-lift metrics.",
-    ],
-    poster: "/project-previews/dinescope-home.png",
-    liveUrl: "https://dinescope-marketplace-intelligence.streamlit.app",
-    repoUrl: "https://github.com/Bilal-03/dinescope-marketplace-intelligence",
-    year: "2026",
+    featured: true,
   },
   {
     slug: "zomato-restaurant-intelligence",
     title: "Zomato Restaurant Intelligence",
     category: "Marketplace Intelligence · Product Strategy · Growth Analytics",
-    tags: ["Marketplace Analytics", "Product Strategy", "ML Simulator"],
+    primaryCategory: "analytics",
+    categoryLabel: "Marketplace Analytics",
+    tags: ["Marketplace Analytics", "Unit Economics", "ML Simulator"],
     summary:
       "Quantifying feature flywheel ROI, locality white spaces, and launch dynamics across 30,336 restaurants.",
     problem:
@@ -262,12 +300,75 @@ export const CASE_STUDIES: CaseStudy[] = [
     liveUrl: "https://zomato-restaurant-intelligence.streamlit.app",
     repoUrl: "https://github.com/Bilal-03/zomato-restaurant-intelligence",
     year: "2026",
+    featured: true,
+  },
+  {
+    slug: "dinescope-marketplace-intelligence",
+    title: "DineScope",
+    category: "Marketplace Intelligence · Product Analytics · Data Quality",
+    primaryCategory: "analytics",
+    categoryLabel: "Marketplace Analytics",
+    tags: ["Marketplace Analytics", "Decision Lab", "Data Quality"],
+    summary: "Making marketplace growth opportunities visible without hiding the limits of the evidence.",
+    problem:
+      "Food-marketplace teams need to decide where to investigate next, but customer growth, market demand, cuisine opportunity and source quality are often measured in separate views. Rankings can look decisive even when they rely on small samples, inconsistent market labels or incomplete supply evidence.",
+    users:
+      "Product and Growth teams evaluating customer and marketplace opportunities, with Marketplace, Category and City Operations as adjacent decision partners.",
+    goal:
+      "Create one decision-ready workspace that connects customer behaviour, market demand, cuisine opportunity and data reliability while separating observed facts, assumptions and investigation hypotheses.",
+    assumptions: [
+      "Teams need evidence thresholds and confidence context before an opportunity enters a prioritised queue.",
+      "Repeat behaviour and cohort retention must remain separate to avoid overstating customer habit.",
+      "A marketplace recommendation is more trustworthy when missing coverage, mapping choices and source limitations are visible at the point of interpretation.",
+    ],
+    decisions: [
+      "Six connected workspaces spanning overview, customer growth, market demand, cuisine gaps, reliability and prioritisation",
+      "Equal-length comparison windows and minimum samples before markets or cuisine opportunities can lead a ranking",
+      "Additive 1/n allocation for multi-cuisine transactions with explicit reconciliation",
+      "Configurable Decision Lab with confidence discounting, evidence guardrails and aggregate-only exports",
+    ],
+    flow: [
+      "Establish the audited marketplace baseline",
+      "Investigate customer, market or cuisine signals",
+      "Review sample size, coverage, mappings and confidence",
+      "Compare priorities and export an evidence-backed decision brief",
+    ],
+    measurementPlan: [
+      "Time from opening the workspace to a prioritised investigation",
+      "Share of ranked opportunities that pass evidence thresholds",
+      "Follow-through from overview signals into deeper analysis",
+      "Decision Lab scenario comparison and brief export rate",
+      "Metric reconciliation, mapping coverage and data-quality test pass rate",
+    ],
+    solution:
+      "A public, aggregate-only marketplace intelligence platform that turns 150,281 source rows into audited customer, demand and cuisine workflows, then keeps validity rules, confidence and evidence boundaries beside every decision signal.",
+    technicalNotes: [
+      "Python 3.11",
+      "Streamlit",
+      "Pandas",
+      "NumPy",
+      "Altair",
+      "Aggregate JSON",
+      "Python unittest",
+    ],
+    improvements: [
+      "Validate the prioritisation workflow with Product, Growth and Marketplace practitioners using real investigation tasks.",
+      "Add durable, permissioned team sharing for Decision Lab scenarios when collaboration becomes a proven need.",
+      "Connect a stronger operational source before adding delivery, cancellation, profitability or causal-lift metrics.",
+    ],
+    poster: "/project-previews/dinescope-home.png",
+    liveUrl: "https://dinescope-marketplace-intelligence.streamlit.app",
+    repoUrl: "https://github.com/Bilal-03/dinescope-marketplace-intelligence",
+    year: "2026",
+    featured: true,
   },
   {
     slug: "ai-business-analytics-studio",
     title: "AI Business Analytics Studio",
     category: "Business Intelligence · Applied AI · Data Products",
-    tags: ["Business Intelligence", "Data Workflows", "Applied AI"],
+    primaryCategory: "analytics",
+    categoryLabel: "Marketplace Analytics",
+    tags: ["Business Intelligence", "DuckDB / SQL", "Applied AI"],
     summary: "Turning raw business data into decisions that can be inspected and reproduced.",
     problem:
       "Business data often arrives as inconsistent exports, while preparation, analysis, forecasting and reporting happen across disconnected tools with little visibility into how a result was produced.",
@@ -323,59 +424,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     year: "2026",
   },
   {
-    slug: "crm-pro",
-    title: "CRM Pro",
-    category: "Sales Operations · Business Systems · Analytics",
-    tags: ["Sales Operations", "Workflow Design", "Reporting"],
-    summary: "Turning scattered sales work into a visible operating system.",
-    problem:
-      "Sales teams lose context when leads, activities, follow-ups, conversations and pipeline decisions live in separate places.",
-    users: "Small sales teams that need a clearer way to manage contacts, opportunities and daily work.",
-    goal:
-      "Create one workspace for pipeline movement, daily activities, automation and reporting without hiding the underlying workflow.",
-    assumptions: [
-      "A shared pipeline makes ownership and next actions easier to understand.",
-      "Daily work views are more useful than a dashboard that only reports history.",
-      "Automation should make follow-through easier without obscuring control.",
-    ],
-    decisions: [
-      "Kanban pipeline for stage movement",
-      "My Day activities and notes for follow-through",
-      "Automation rules for repeatable actions",
-      "Reports, goals and forecast views for decision-making",
-    ],
-    flow: [
-      "Capture and qualify a lead",
-      "Move the opportunity through pipeline stages",
-      "Schedule activities and record context",
-      "Review conversion, pipeline and forecast signals",
-    ],
-    measurementPlan: [
-      "Stage-to-stage conversion rate",
-      "Pipeline value by owner and source",
-      "Sales cycle and time in stage",
-      "Win rate and forecast versus target",
-      "Activity completion and follow-up drop-off",
-    ],
-    solution:
-      "A business system that combines contacts, pipeline, activities, automation and reporting around the way a sales team actually works.",
-    technicalNotes: ["React", "Vite", "PostgreSQL", "Clerk", "Tailwind CSS"],
-    improvements: [
-      "Validate the default pipeline and reporting views with sales teams.",
-      "Add stronger permissions and audit history for business-critical changes.",
-      "Connect reporting definitions directly to a documented metric glossary.",
-    ],
-    poster: "/project-previews/crm-pro-home.png",
-    liveUrl: "https://crm-sepia-chi-24.vercel.app",
-    repoUrl: "https://github.com/Bilal-03/crm",
-    year: "2023",
-  },
-  {
     slug: "bizguide-ai",
     title: "BizGuide AI",
     category: "AI Product · Knowledge Retrieval · Compliance UX",
-    tags: ["Applied AI", "RAG", "Compliance UX"],
-    summary: "Document-grounded compliance guidance for Indian businesses.",
+    primaryCategory: "ai",
+    categoryLabel: "Applied AI",
+    tags: ["RAG Architecture", "LLM Systems", "Compliance UX"],
+    summary: "Document-grounded compliance guidance and multi-agent retrieval for Indian businesses.",
     problem:
       "Business owners face complex legal, tax and compliance questions, but generic answers can be difficult to trust or apply to a specific business.",
     users: "Indian businesses looking for practical, source-backed guidance across legal, tax and general compliance questions.",
@@ -427,59 +482,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     year: "2026",
   },
   {
-    slug: "karobarkit",
-    title: "KarobarKit",
-    category: "Business Systems · Tool Discovery · Workflows",
-    tags: ["Business Tools", "Workflow Design", "Utility UX"],
-    summary: "Helping businesses find and complete practical operational tasks.",
-    problem:
-      "Small businesses often need a specific calculator, invoice tool or operational utility but have to search across disconnected resources to find one.",
-    users: "Business owners and operators looking for practical tools for everyday work.",
-    goal:
-      "Turn a broad business task into a focused path to the right tool, result or next action.",
-    assumptions: [
-      "People search by the task they need to complete, not by the name of a product.",
-      "Clear categories and filters can reduce discovery friction.",
-      "A useful result should make the next operational action obvious.",
-    ],
-    decisions: [
-      "Task-first search and category filters",
-      "Tool cards with scope and verification context",
-      "Focused calculator and generator flows",
-      "Result and receipt views that support the next action",
-    ],
-    flow: [
-      "Describe or search for a business task",
-      "Filter and select the right tool",
-      "Enter the required business context",
-      "Review, export or act on the result",
-    ],
-    measurementPlan: [
-      "Search-to-tool selection rate",
-      "Tool completion rate by category",
-      "Drop-off by input step",
-      "Result export or follow-up action rate",
-      "Repeat usage for recurring tasks",
-    ],
-    solution:
-      "A task-oriented business toolkit that brings discovery, calculators and operational utilities into a calmer, more searchable experience.",
-    technicalNotes: ["React", "TypeScript", "Product information architecture"],
-    improvements: [
-      "Test the category model with operators who use different business vocabulary.",
-      "Add saved tools and recent-task shortcuts for repeat workflows.",
-      "Verify each tool's result format and data freshness before production use.",
-    ],
-    poster: "/project-previews/karobarkit-home.png",
-    liveUrl: "https://karobarkit.vercel.app",
-    repoUrl: "https://github.com/Bilal-03/karobarkit",
-    year: "2026",
-  },
-  {
     slug: "finassist",
     title: "FinAssist",
     category: "FinTech · Financial Information · Tools",
-    tags: ["FinTech", "Information Architecture", "Calculators"],
-    summary: "Bringing financial information and everyday money tools into one place.",
+    primaryCategory: "product",
+    categoryLabel: "0-to-1 Product",
+    tags: ["FinTech", "Calculators", "Information UX"],
+    summary: "Bringing market telemetry, financial calculations, and planning utilities into one calm workspace.",
     problem:
       "Financial tasks often require switching between market information, calculators, currency data and different sources of context.",
     users: "People exploring financial information, calculations and market context in one workspace.",
@@ -523,11 +532,113 @@ export const CASE_STUDIES: CaseStudy[] = [
     year: "2025",
   },
   {
+    slug: "karobarkit",
+    title: "KarobarKit",
+    category: "Business Systems · Tool Discovery · Workflows",
+    primaryCategory: "product",
+    categoryLabel: "0-to-1 Product",
+    tags: ["Business Utilities", "Workflow Design", "Tool Discovery"],
+    summary: "Helping small businesses discover and complete practical operational tasks and calculations.",
+    problem:
+      "Small businesses often need a specific calculator, invoice tool or operational utility but have to search across disconnected resources to find one.",
+    users: "Business owners and operators looking for practical tools for everyday work.",
+    goal:
+      "Turn a broad business task into a focused path to the right tool, result or next action.",
+    assumptions: [
+      "People search by the task they need to complete, not by the name of a product.",
+      "Clear categories and filters can reduce discovery friction.",
+      "A useful result should make the next operational action obvious.",
+    ],
+    decisions: [
+      "Task-first search and category filters",
+      "Tool cards with scope and verification context",
+      "Focused calculator and generator flows",
+      "Result and receipt views that support the next action",
+    ],
+    flow: [
+      "Describe or search for a business task",
+      "Filter and select the right tool",
+      "Enter the required business context",
+      "Review, export or act on the result",
+    ],
+    measurementPlan: [
+      "Search-to-tool selection rate",
+      "Tool completion rate by category",
+      "Drop-off by input step",
+      "Result export or follow-up action rate",
+      "Repeat usage for recurring tasks",
+    ],
+    solution:
+      "A task-oriented business toolkit that brings discovery, calculators and operational utilities into a calmer, more searchable experience.",
+    technicalNotes: ["React", "TypeScript", "Information Architecture"],
+    improvements: [
+      "Test the category model with operators who use different business vocabulary.",
+      "Add saved tools and recent-task shortcuts for repeat workflows.",
+      "Verify each tool's result format and data freshness before production use.",
+    ],
+    poster: "/project-previews/karobarkit-home.png",
+    liveUrl: "https://karobarkit.vercel.app",
+    repoUrl: "https://github.com/Bilal-03/karobarkit",
+    year: "2026",
+  },
+  {
+    slug: "crm-pro",
+    title: "CRM Pro",
+    category: "Sales Operations · Business Systems · Analytics",
+    primaryCategory: "product",
+    categoryLabel: "0-to-1 Product",
+    tags: ["Sales Operations", "Kanban Pipeline", "Business Systems"],
+    summary: "Turning scattered sales work into a visible, structured operating system.",
+    problem:
+      "Sales teams lose context when leads, activities, follow-ups, conversations and pipeline decisions live in separate places.",
+    users: "Small sales teams that need a clearer way to manage contacts, opportunities and daily work.",
+    goal:
+      "Create one workspace for pipeline movement, daily activities, automation and reporting without hiding the underlying workflow.",
+    assumptions: [
+      "A shared pipeline makes ownership and next actions easier to understand.",
+      "Daily work views are more useful than a dashboard that only reports history.",
+      "Automation should make follow-through easier without obscuring control.",
+    ],
+    decisions: [
+      "Kanban pipeline for stage movement",
+      "My Day activities and notes for follow-through",
+      "Automation rules for repeatable actions",
+      "Reports, goals and forecast views for decision-making",
+    ],
+    flow: [
+      "Capture and qualify a lead",
+      "Move the opportunity through pipeline stages",
+      "Schedule activities and record context",
+      "Review conversion, pipeline and forecast signals",
+    ],
+    measurementPlan: [
+      "Stage-to-stage conversion rate",
+      "Pipeline value by owner and source",
+      "Sales cycle and time in stage",
+      "Win rate and forecast versus target",
+      "Activity completion and follow-up drop-off",
+    ],
+    solution:
+      "A business system that combines contacts, pipeline, activities, automation and reporting around the way a sales team actually works.",
+    technicalNotes: ["React", "Vite", "PostgreSQL", "Clerk", "Tailwind CSS"],
+    improvements: [
+      "Validate the default pipeline and reporting views with sales teams.",
+      "Add stronger permissions and audit history for business-critical changes.",
+      "Connect reporting definitions directly to a documented metric glossary.",
+    ],
+    poster: "/project-previews/crm-pro-home.png",
+    liveUrl: "https://crm-sepia-chi-24.vercel.app",
+    repoUrl: "https://github.com/Bilal-03/crm",
+    year: "2023",
+  },
+  {
     slug: "invoice-intelligence",
     title: "Invoice Intelligence",
     category: "AI Automation · AP Workflows · Document Intelligence",
-    tags: ["Document AI", "AP Automation", "Human Review"],
-    summary: "Turning unstructured invoices into reviewable business data.",
+    primaryCategory: "ai",
+    categoryLabel: "Applied AI",
+    tags: ["Document OCR", "AP Automation", "Human-in-the-Loop"],
+    summary: "Turning unstructured invoices into validated, reviewable accounts-payable data.",
     problem:
       "Accounts-payable teams need to extract, verify and act on invoice data, but documents arrive in inconsistent formats and low-confidence fields need human attention.",
     users: "Procurement and accounts-payable teams reviewing invoices and payment readiness.",
@@ -586,8 +697,8 @@ const PROJECT_DISPLAY_ORDER = [
   "zomato-restaurant-intelligence",
   "dinescope-marketplace-intelligence",
   "ai-business-analytics-studio",
-  "finassist",
   "bizguide-ai",
+  "finassist",
   "karobarkit",
   "crm-pro",
   "invoice-intelligence",
@@ -601,90 +712,105 @@ export const EXPERIENCE = [
   {
     title: "Project Manager",
     company: "Digital Data Solution Pvt Ltd",
+    badge: "Product & Operations Management",
     location: "Delhi, India · Hybrid",
     period: "Jan 2026 – Present",
     current: true,
     bullets: [
-      "Coordinating scanning and digitisation projects from planning through quality-controlled delivery.",
-      "Managing timelines, resources and cross-functional communication across operational workflows.",
-      "Identifying process improvements that make document-heavy work more predictable and measurable.",
+      "Coordinating document digitization & scanning workflows from scoping through quality-controlled delivery across cross-functional teams.",
+      "Structuring project roadmaps, resource allocation, and milestone governance to keep complex operations on schedule.",
+      "Engineering data-driven process audits and standard operating procedures (SOPs) that increased scanning throughput predictability.",
     ],
   },
   {
     title: "Founder",
     company: "Handovr",
+    badge: "0-to-1 Product & Marketplace",
     location: "India · On-site",
     period: "Jan 2026 – Present",
     current: true,
     bullets: [
-      "Building a verified marketplace that addresses trust, verification and coordination in second-hand phone transactions.",
-      "Shaping the product journey from listing discovery through pricing, payment and final handover.",
-      "Using direct product iteration to test which workflows create confidence for buyers and sellers.",
+      "Designed and launched an end-to-end verified C2C marketplace solving trust, pricing uncertainty, and handover coordination for used electronics.",
+      "Engineered a proprietary 16-point hardware verification workflow, escrow payment flow, and doorstep coordination model.",
+      "Conducting direct user testing and qualitative feedback sessions across Delhi NCR to validate buyer confidence triggers and drop-off bottlenecks.",
     ],
   },
   {
     title: "AI & Automation Intern",
     company: "NimbleS2P by Techpanion",
+    badge: "Applied AI & Document Systems",
     location: "Remote / Hybrid",
     period: "Jun 2024 – Jul 2024",
     current: false,
     bullets: [
-      "Worked on an invoice intelligence and accounts-payable automation platform for turning unstructured documents into validated business data.",
-      "Built OCR and document-processing workflows covering preprocessing, extraction, validation and structured output.",
-      "Contributed to review and analytics workflows for low-confidence fields, duplicate detection and vendor operations.",
+      "Contributed to an enterprise AP invoice automation platform extracting and validating structured tabular data from multi-format vendor invoices.",
+      "Built document processing pipelines integrating OpenCV preprocessing, OCR bounding-box extraction, and validation rules.",
+      "Developed human-in-the-loop review queues and duplicate detection heuristics that reduced manual document inspection overhead.",
     ],
   },
   {
     title: "Product & Business Systems Intern",
     company: "iCtrlBiz Consulting Pvt Ltd",
+    badge: "Product & Sales Systems",
     location: "Noida, India",
     period: "Aug 2023 – Dec 2023",
     current: false,
     bullets: [
-      "Worked on a CRM and lead-management product focused on customer relationships, sales pipelines, meetings, quotes and invoices.",
-      "Translated business workflows into product features such as Kanban pipelines, reminders, dashboards and activity management.",
-      "Improved workflow visibility and organization across customer and sales processes with a React and PostgreSQL-based solution.",
+      "Mapped complex B2B sales cycles into modular CRM software features including Kanban stage management, quotes, and activity trackers.",
+      "Collaborated with business stakeholders to design user journey wireframes, metric dashboards, and automated lead notifications.",
+      "Implemented full-stack features using React and PostgreSQL, significantly improving sales visibility and follow-up adherence.",
     ],
   },
 ];
 
 export const SKILLS = [
   {
-    title: "Product",
+    title: "Product Strategy & Discovery",
+    tagline: "Framing problems, PRDs, and user journeys",
     items: [
-      "Problem Framing",
-      "Requirements",
-      "User Flows",
-      "Prioritisation",
-      "Product Metrics",
-      "Business Analysis",
+      "Problem Framing & Opportunity Sizing",
+      "Product Requirements (PRDs & Specs)",
+      "User Journey Mapping & Personas",
+      "Prioritization (RICE / Kano Framework)",
+      "Marketplace Mechanics & Unit Economics",
+      "Go-to-Market (GTM) Strategy",
     ],
   },
   {
-    title: "Analytics",
+    title: "Product Analytics & SQL",
+    tagline: "KPI design, cohort retention, and data exploration",
     items: [
-      "SQL",
-      "KPI Analysis",
-      "Reporting",
-      "Data Exploration",
-      "Funnel Analysis",
-      "Process Measurement",
+      "Advanced SQL (CTEs, Window Functions, Partitions)",
+      "KPI & Metric Hierarchy Design",
+      "Cohort & Retention Modeling",
+      "Funnel Diagnostic & Drop-off Analysis",
+      "A/B Testing & Experimentation Logic",
+      "Business Intelligence (DuckDB, Pandas, Plotly)",
     ],
   },
   {
-    title: "Applied AI",
+    title: "Applied AI & Knowledge Systems",
+    tagline: "RAG architectures, OCR, and predictive models",
     items: [
-      "LLM Applications",
-      "RAG",
-      "Document Intelligence",
-      "Automation",
-      "Prompt / AI Workflows",
-      "AI-assisted Prototyping",
+      "LLM Orchestration & Multi-Agent RAG",
+      "Vector Databases & Semantic Embeddings",
+      "Document OCR & Extraction Pipelines",
+      "Predictive ML Simulators (Scikit-Learn)",
+      "Prompt Engineering & Guardrails",
+      "AI-assisted Rapid Prototyping",
     ],
   },
   {
-    title: "Technical",
-    items: ["Python", "React", "APIs", "PostgreSQL", "Supabase", "Git / GitHub"],
+    title: "Technical & Execution Stack",
+    tagline: "Full-stack building, data APIs, and deployment",
+    items: [
+      "Python (FastAPI, Streamlit, Pandas, NumPy)",
+      "TypeScript / React / Next.js",
+      "PostgreSQL / SQLite / Supabase",
+      "REST APIs & Data Ingestion",
+      "Tailwind CSS & Modern UI Systems",
+      "Git / GitHub / Cloud Deployment",
+    ],
   },
 ];
 
@@ -694,6 +820,7 @@ export const EDUCATION = [
     qualification: "B.Tech in Computer Science and Engineering (AI and ML)",
     period: "Sep 2021 – Jul 2025",
     location: "Chennai, India",
+    details: "Focused on Artificial Intelligence, Machine Learning, Data Structures, and Software Engineering.",
   },
 ];
 

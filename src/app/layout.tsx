@@ -11,7 +11,7 @@ const inter = Inter({
 const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -19,30 +19,30 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Bilal Choudhary — Product, Data & Applied AI",
+  title: "Bilal Choudhary — Product Manager & Analytics Practitioner",
   description:
-    "Bilal Choudhary turns problems and data into useful products through product thinking, analytics and AI-assisted development.",
+    "Bilal Choudhary turns complex problems and empirical data into high-impact digital products through product strategy, analytics, and applied AI systems.",
   keywords: [
     "Bilal Choudhary",
-    "Product",
-    "Data Analytics",
+    "Product Manager",
+    "Product Analytics",
+    "Marketplace Intelligence",
     "Applied AI",
     "Product Strategy",
-    "Business Systems",
-    "AI Products",
+    "Growth & Operations",
   ],
   authors: [{ name: "Bilal Choudhary" }],
   openGraph: {
-    title: "Bilal Choudhary — Product, Data & Applied AI",
+    title: "Bilal Choudhary — Product Manager & Analytics Practitioner",
     description:
-      "Turning user problems, business requirements and data into useful digital products.",
+      "Turning user pain points, marketplace economics, and data into useful digital products.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bilal Choudhary — Product, Data & Applied AI",
+    title: "Bilal Choudhary — Product Manager & Analytics Practitioner",
     description:
-      "Turning user problems, business requirements and data into useful digital products.",
+      "Turning user pain points, marketplace economics, and data into useful digital products.",
   },
 };
 
@@ -52,7 +52,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${ibmPlexMono.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('portfolio-theme');
+                  if (saved === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  }
+                } catch (e) {
+                  document.documentElement.setAttribute('data-theme', 'dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

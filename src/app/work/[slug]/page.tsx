@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import ProjectMedia from "@/components/ui/ProjectMedia";
 import Navbar from "@/components/Navbar";
 import Reveal from "@/components/ui/Reveal";
 import { CASE_STUDIES, PROFILE } from "@/data/projects";
@@ -21,10 +21,10 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
   if (!project) return {};
 
   return {
-    title: `${project.title} — ${PROFILE.name}`,
+    title: `${project.title} — Case Study | ${PROFILE.name}`,
     description: project.summary,
     openGraph: {
-      title: `${project.title} — ${PROFILE.name}`,
+      title: `${project.title} — Case Study | ${PROFILE.name}`,
       description: project.summary,
       images: [project.poster],
       type: "article",
@@ -33,20 +33,27 @@ export async function generateMetadata({ params }: CaseStudyPageProps): Promise<
 }
 
 const ExternalIcon = () => (
-  <svg className="external-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+  <svg
+    className="external-icon"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+    aria-hidden="true"
+  >
     <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
   </svg>
 );
 
 function Section({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="case-study-section">
+    <article className="case-study-section-card">
       <div className="case-study-section-heading">
         <span className="case-study-section-number">{number}</span>
         <h2>{title}</h2>
       </div>
       {children}
-    </section>
+    </article>
   );
 }
 
@@ -82,12 +89,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                   <p className="case-study-summary">{project.summary}</p>
                   <div className="case-study-hero-links">
                     {project.liveUrl && (
-                      <a href={project.liveUrl} target="_blank" rel="noreferrer" className="button button-dark">
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="button button-primary button-large"
+                      >
                         Live Demo <ExternalIcon />
                       </a>
                     )}
                     {project.repoUrl && (
-                      <a href={project.repoUrl} target="_blank" rel="noreferrer" className="button button-outline">
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="button button-outline button-large"
+                      >
                         GitHub <ExternalIcon />
                       </a>
                     )}
@@ -97,18 +114,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
 
             <Reveal delay={160}>
-              <ProjectMedia
-                poster={project.poster}
-                alt={`${project.title} home page interface`}
-                className="case-study-media"
-                priority
-              />
+              <div className="case-study-media-frame">
+                <Image
+                  src={project.poster}
+                  alt={`${project.title} dashboard interface preview`}
+                  fill
+                  priority
+                  sizes="(max-width: 1200px) 100vw, 1200px"
+                  className="project-poster-img"
+                />
+              </div>
             </Reveal>
           </div>
         </header>
 
-        <div className="site-container case-study-content">
-          <aside className="case-study-side" aria-label="Case study summary">
+        <div className="site-container case-study-content-layout">
+          <aside className="case-study-sidebar" aria-label="Case study summary">
             <dl>
               <div>
                 <dt>Project</dt>
@@ -119,33 +140,37 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 <dd>{project.year}</dd>
               </div>
               <div>
-                <dt>Focus</dt>
+                <dt>Domain</dt>
+                <dd>{project.category}</dd>
+              </div>
+              <div>
+                <dt>Core Themes</dt>
                 <dd>{project.tags.join(" · ")}</dd>
               </div>
             </dl>
           </aside>
 
-          <div className="case-study-sections">
+          <div className="case-study-sections-container">
             <Reveal>
-              <Section number="01" title="The problem">
+              <Section number="01" title="The Problem">
                 <p>{project.problem}</p>
               </Section>
             </Reveal>
 
             <Reveal>
-              <Section number="02" title="Users">
+              <Section number="02" title="Target Users">
                 <p>{project.users}</p>
               </Section>
             </Reveal>
 
             <Reveal>
-              <Section number="03" title="Product goal">
+              <Section number="03" title="Product Goal">
                 <p>{project.goal}</p>
               </Section>
             </Reveal>
 
             <Reveal>
-              <Section number="04" title="Research & assumptions">
+              <Section number="04" title="Research & Key Assumptions">
                 <ul className="case-study-list">
                   {project.assumptions.map((assumption) => (
                     <li key={assumption}>{assumption}</li>
@@ -155,7 +180,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </Reveal>
 
             <Reveal>
-              <Section number="05" title="Product decisions">
+              <Section number="05" title="Product & System Decisions">
                 <ul className="case-study-list">
                   {project.decisions.map((decision) => (
                     <li key={decision}>{decision}</li>
@@ -165,12 +190,12 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </Reveal>
 
             <Reveal>
-              <Section number="06" title="User flow">
-                <div className="flow-list">
+              <Section number="06" title="User Journey & Decision Flow">
+                <div className="flow-grid">
                   {project.flow.map((step, index) => (
-                    <div key={step} className="flow-step">
+                    <div key={step} className="flow-step-box">
                       <span>0{index + 1}</span>
-                      {step}
+                      <div>{step}</div>
                     </div>
                   ))}
                 </div>
@@ -178,11 +203,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </Reveal>
 
             <Reveal>
-              <Section number="07" title="How I would measure it">
+              <Section number="07" title="Measurement Plan & Success Metrics">
                 <div className="measurement-grid">
                   {project.measurementPlan.map((metric) => (
-                    <div key={metric} className="measurement-card">
-                      {metric}
+                    <div key={metric} className="measurement-box">
+                      ✓ {metric}
                     </div>
                   ))}
                 </div>
@@ -190,24 +215,26 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </Reveal>
 
             <Reveal>
-              <Section number="08" title="The solution">
+              <Section number="08" title="The Solution">
                 <p>{project.solution}</p>
               </Section>
             </Reveal>
 
             <Reveal>
-              <Section number="09" title="Technical notes">
-                <p>The implementation supports the product decision, rather than leading the story.</p>
-                <div className="case-study-technical">
+              <Section number="09" title="Technical Implementation">
+                <p>Architecture and technology choices engineered to serve the product requirements:</p>
+                <div className="technical-notes-pills">
                   {project.technicalNotes.map((note) => (
-                    <span key={note}>{note}</span>
+                    <span key={note} className="tech-pill">
+                      {note}
+                    </span>
                   ))}
                 </div>
               </Section>
             </Reveal>
 
             <Reveal>
-              <Section number="10" title="What I would improve next">
+              <Section number="10" title="Future Improvements & Roadmap">
                 <ul className="case-study-list">
                   {project.improvements.map((improvement) => (
                     <li key={improvement}>{improvement}</li>

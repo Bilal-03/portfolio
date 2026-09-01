@@ -4,50 +4,55 @@ import SectionHeader from "@/components/ui/SectionHeader";
 const CAPABILITIES = [
   {
     number: "01",
-    title: "Product Thinking",
-    description: "User problems → requirements → features → experiences.",
-    detail: "I turn vague needs into clear product questions, flows and priorities.",
+    title: "Product Strategy & 0-to-1",
+    description: "User pain → PRD specifications → Trust mechanics → Shipped MVP.",
+    detail:
+      "Experienced in end-to-end product development, from mapping transaction friction to building escrow and verification flows (Handovr).",
   },
   {
     number: "02",
-    title: "Data & Analytics",
-    description: "Data exploration → insights → metrics → decisions.",
-    detail: "I use funnels, KPIs and operational signals to understand what deserves attention.",
+    title: "Marketplace & Decision Analytics",
+    description: "Multi-cohort SQL → Opportunity Indexing → Unit Economics → Strategy.",
+    detail:
+      "Extracting actionable signals from 30k+ listings, modeling feature adoption flywheels, and publishing C-level product strategy memos.",
   },
   {
     number: "03",
-    title: "Business Systems",
-    description: "Workflows → processes → automation → improvement.",
-    detail: "I make the invisible steps in business work easier to see and improve.",
+    title: "Applied AI & Document Intelligence",
+    description: "Multi-Agent RAG → Optical Extraction → Predictive ML Simulators.",
+    detail:
+      "Engineering production LLM workflows, AP invoice OCR pipelines, and Scikit-Learn launch engines grounded in empirical evidence.",
   },
   {
     number: "04",
-    title: "Applied AI",
-    description: "Use AI where it meaningfully improves a product.",
-    detail: "I prototype retrieval, extraction and automation around a real user or business need.",
+    title: "Full-Stack Rapid Prototyping",
+    description: "Python / FastAPI / Streamlit / React / Next.js / PostgreSQL.",
+    detail:
+      "Deep technical competence to architect, test, and deploy functional software directly, accelerating team velocity.",
   },
 ];
 
 export default function WhatIBring() {
   return (
-    <section id="capabilities" className="section">
+    <section id="capabilities" className="section section-soft">
       <div className="site-container">
         <Reveal>
           <SectionHeader
-            index="04"
-            label="What I bring"
-            title="A product lens with enough technical depth to execute."
+            index="05"
+            label="Core Strengths"
+            title="Product strategy with data rigor and builder capability."
+            description="The intersection of user empathy, analytical depth, and technical execution."
           />
         </Reveal>
 
-        <div className="capability-grid">
-          {CAPABILITIES.map((capability, index) => (
-            <Reveal key={capability.number} delay={index * 70}>
-              <article className="capability-card">
-                <span className="capability-number">{capability.number}</span>
-                <h3>{capability.title}</h3>
-                <p className="capability-description">{capability.description}</p>
-                <p className="capability-detail">{capability.detail}</p>
+        <div className="positioning-grid">
+          {CAPABILITIES.map((cap, index) => (
+            <Reveal key={cap.number} delay={index * 80}>
+              <article className="positioning-card">
+                <span className="positioning-number">{cap.number}</span>
+                <h3>{cap.title}</h3>
+                <p className="text-emerald-400 font-mono text-xs uppercase tracking-wider">{cap.description}</p>
+                <p>{cap.detail}</p>
               </article>
             </Reveal>
           ))}

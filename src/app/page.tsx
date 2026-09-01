@@ -1,12 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Positioning from "@/components/Positioning";
+import ImpactMetrics from "@/components/ImpactMetrics";
 import Projects from "@/components/Projects";
+import Positioning from "@/components/Positioning";
 import HowIWork from "@/components/HowIWork";
 import WhatIBring from "@/components/WhatIBring";
 import Experience from "@/components/Experience";
-import About from "@/components/About";
 import Skills from "@/components/Skills";
+import About from "@/components/About";
 import Education from "@/components/Education";
 import Footer from "@/components/Footer";
 
@@ -19,13 +20,14 @@ export default function Home() {
       <Navbar />
       <main id="main-content">
         <Hero />
-        <Positioning />
+        <ImpactMetrics />
         <Projects />
+        <Positioning />
         <HowIWork />
         <WhatIBring />
         <Experience />
-        <About />
         <Skills />
+        <About />
         <Education />
         <Footer />
       </main>
