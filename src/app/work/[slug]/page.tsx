@@ -65,9 +65,6 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to content
-      </a>
       <Navbar />
       <main id="main-content" className="case-study-main">
         <header className="case-study-hero">
