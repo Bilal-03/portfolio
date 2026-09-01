@@ -206,6 +206,64 @@ export const CASE_STUDIES: CaseStudy[] = [
     year: "2026",
   },
   {
+    slug: "zomato-restaurant-intelligence",
+    title: "Zomato Restaurant Intelligence",
+    category: "Marketplace Intelligence · Product Strategy · Growth Analytics",
+    tags: ["Marketplace Analytics", "Product Strategy", "ML Simulator"],
+    summary:
+      "Quantifying feature flywheel ROI, locality white spaces, and launch dynamics across 30,336 restaurants.",
+    problem:
+      "Food delivery and dining platforms operate in dense, hyper-competitive urban micro-markets where merchant partners and category managers struggle to make evidence-based decisions about feature adoption (delivery vs. reservations), locality expansion, pricing positioning, and menu specialization.",
+    users:
+      "Marketplace operations managers, restaurant founders, product strategists, and category leads evaluating merchant unit economics, feature ROI, and micro-market white spaces.",
+    goal:
+      "Build an end-to-end marketplace intelligence system with interactive macro KPIs, empirical feature flywheel economics, locality opportunity indexing, and a predictive launch simulator to turn 30,336 listings into actionable expansion strategies.",
+    assumptions: [
+      "Merchants and category managers need clear empirical ROI evidence before committing to dual-feature adoption or new locality launches.",
+      "Demand density (votes per venue) and spend capacity reveal actionable micro-market white spaces better than raw listing counts alone.",
+      "A predictive simulation model allows operators to test pricing, cuisine, and feature scenarios before risking capital on launches.",
+    ],
+    decisions: [
+      "Four-cohort feature adoption flywheel quantifying uplift for delivery, table reservations, and dual-adoption",
+      "Composite Market Opportunity Index (MOI) weighting demand intensity (50%), spend power (25%), and quality headroom (25%)",
+      "Predictive ML launch simulator providing real-time expected rating, competitive density, and price positioning benchmarks",
+      "Production SQL analytics suite featuring 8 interview-grade queries with multi-tier CTEs and window functions",
+      "Executive strategy memo articulating North Star metric (Weekly Successful Dining Interactions) and Google HEART framework",
+    ],
+    flow: [
+      "Filter marketplace by micro-market, price tier, and feature enablement",
+      "Analyze unit economics, rating uplift, and engagement across feature cohorts",
+      "Identify underserved locality gaps and cuisine white spaces using MOI",
+      "Simulate restaurant launch scenarios and inspect evidence-backed SQL queries",
+    ],
+    measurementPlan: [
+      "Dual-feature adoption rate and table reservation expansion velocity",
+      "Market Opportunity Index ranking validation vs. real-world merchant launch success",
+      "Weekly Successful Dining Interactions (WSDI) across micro-markets",
+      "Merchant onboarding simulation accuracy (predicted vs. realized ratings)",
+      "Category manager engagement across SQL query runner and strategic modules",
+    ],
+    solution:
+      "An interactive Streamlit marketplace intelligence platform combining empirical unit economics across 30,336 listings, a composite Market Opportunity Index, a Scikit-Learn predictive launch engine, and an 8-query SQL analytics suite with an executive C-level strategy memo.",
+    technicalNotes: [
+      "Python 3.10+",
+      "Streamlit",
+      "Pandas",
+      "Plotly",
+      "Scikit-Learn",
+      "SQLite / SQL (CTEs, Window Functions)",
+    ],
+    improvements: [
+      "Integrate real-time merchant POS and kitchen order feed data to model intraday peak-hour demand and kitchen wait bottlenecks.",
+      "Expand the predictive simulator with causal uplift modeling to isolate organic merchant quality from feature-driven gains.",
+      "Build automated merchant diagnostic reports with downloadable PDF action plans for restaurant owners.",
+    ],
+    poster: "/project-previews/zomato-restaurant-intelligence-home.png",
+    liveUrl: "https://zomato-restaurant-intelligence.streamlit.app",
+    repoUrl: "https://github.com/Bilal-03/zomato-restaurant-intelligence",
+    year: "2026",
+  },
+  {
     slug: "ai-business-analytics-studio",
     title: "AI Business Analytics Studio",
     category: "Business Intelligence · Applied AI · Data Products",
@@ -525,6 +583,7 @@ export const CASE_STUDIES: CaseStudy[] = [
 const PROJECT_DISPLAY_ORDER = [
   "handovr",
   "productlens",
+  "zomato-restaurant-intelligence",
   "dinescope-marketplace-intelligence",
   "ai-business-analytics-studio",
   "finassist",
