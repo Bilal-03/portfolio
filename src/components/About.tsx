@@ -2,92 +2,128 @@ import Reveal from "@/components/ui/Reveal";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { EDUCATION, CERTIFICATIONS } from "@/data/projects";
 
-const QUICK_FACTS = [
-  {
-    label: "Education",
-    value: "B.Tech in CS (AI & ML)",
-    sub: "Vellore Institute of Technology (VIT)",
-  },
-  {
-    label: "Hands-on Work",
-    value: "Founder @ Handovr & PM",
-    sub: "0-to-1 marketplace & operations",
-  },
-  {
-    label: "Focus Areas",
-    value: "Product · Analytics · AI",
-    sub: "PRDs, SQL telemetry, and LLMs",
-  },
-  {
-    label: "Status",
-    value: "Open to Opportunities",
-    sub: "PM, Analytics & Applied AI roles",
-  },
-];
-
 export default function About() {
   const primaryEdu = EDUCATION[0];
 
   return (
-    <section id="about" className="section section-soft">
+    <section id="about" className="section">
       <div className="site-container">
         <Reveal>
           <SectionHeader
             index="03"
             label="Background"
-            title="Building at the intersection of product, data & AI."
+            title="Product Mindset. Engineering Rigor."
             description="Bridging customer pain points, data-driven unit economics, and production engineering reality."
           />
         </Reveal>
 
-        <div className="about-grid mt-10">
-          <Reveal delay={80}>
-            <div className="about-copy space-y-4 text-slate-300 leading-relaxed">
-              <p>
-                My background in <strong>Computer Science (AI & Machine Learning)</strong> from{" "}
-                <strong>{primaryEdu?.institution || "Vellore Institute of Technology"}</strong> provides the empirical depth to build data systems, predictive models, and LLM pipelines directly — while my product mindset keeps the focus squarely on <strong>user pain points, unit economics, and tangible business outcomes</strong>.
-              </p>
-              <p>
-                From launching <strong>Handovr</strong> (a 0-to-1 verified C2C electronics marketplace) and managing enterprise document workflows, to modeling 30,000+ restaurant listings and architecting document OCR pipelines, I specialize in taking ambiguous challenges from zero to a reliable, evidence-backed product.
-              </p>
-            </div>
-          </Reveal>
+        {/* Split Two-Card Bento (55% / 45%) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
+          
+          {/* Card 1: Story & Technical Foundation (55% = 7 cols) */}
+          <div className="lg:col-span-7">
+            <Reveal delay={60}>
+              <div className="bento-card p-6 sm:p-8 border border-white/10 h-full flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">
+                      My Story & Approach
+                    </span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-xs text-slate-400 font-mono">End-to-End Ownership</span>
+                  </div>
 
-          {/* Scannable Quick Facts Grid */}
-          <Reveal delay={120}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {QUICK_FACTS.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="p-4 rounded-xl border border-white/10 bg-white/[0.02]"
-                >
-                  <span className="text-xs font-mono uppercase tracking-wider text-emerald-400">
-                    {fact.label}
-                  </span>
-                  <div className="font-semibold text-white mt-1 text-sm">{fact.value}</div>
-                  <div className="text-xs text-slate-400 mt-0.5">{fact.sub}</div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 tracking-tight">
+                    Engineering products grounded in evidence rather than intuition.
+                  </h3>
+
+                  <div className="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                    <p>
+                      My foundation in <strong>Computer Science (AI & Machine Learning)</strong> from{" "}
+                      <strong>{primaryEdu?.institution || "Vellore Institute of Technology"}</strong> gives me the technical fluency to architect data pipelines, predictive models, and LLM applications directly — while my product instincts keep the focus squarely on <strong>user friction, unit economics, and business outcomes</strong>.
+                    </p>
+                    <p>
+                      From conceptualizing and launching <strong>Handovr</strong> (a 0-to-1 verified electronics marketplace with escrow mechanics) to modeling 30,000+ restaurant listings and building enterprise AP invoice OCR engines, I thrive on bringing structure to ambiguous operational problems and shipping software that users trust.
+                    </p>
+                  </div>
                 </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
 
-        {/* Credentials Pills */}
-        <Reveal delay={160}>
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center gap-3">
-            <span className="text-xs font-mono uppercase tracking-wider text-slate-400 mr-2">
-              Accreditations:
-            </span>
-            {CERTIFICATIONS.map((cert) => (
-              <span
-                key={cert}
-                className="text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300"
-              >
-                ✓ {cert}
-              </span>
-            ))}
+                <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                    <span>0-to-1 Product Discovery</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+                    <span>Empirical SQL Telemetry</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+                    <span>Production AI Systems</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+
+          {/* Card 2: Education & Verified Credentials (45% = 5 cols) */}
+          <div className="lg:col-span-5">
+            <Reveal delay={120}>
+              <div className="bento-card p-6 sm:p-8 border border-white/10 h-full flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">
+                      Education & Credentials
+                    </span>
+                    <span className="text-slate-600">·</span>
+                    <span className="text-xs text-slate-400 font-mono">Academic Foundation</span>
+                  </div>
+
+                  {/* University Degree */}
+                  <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 mb-6">
+                    <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+                      <span>{primaryEdu.period}</span>
+                      <span>{primaryEdu.location}</span>
+                    </div>
+                    <h4 className="text-base font-bold text-white mb-0.5">
+                      {primaryEdu.institution}
+                    </h4>
+                    <p className="text-xs font-medium text-indigo-300 mb-2">
+                      {primaryEdu.qualification}
+                    </p>
+                    <p className="text-xs text-slate-400 leading-relaxed">
+                      {primaryEdu.details}
+                    </p>
+                  </div>
+
+                  {/* Verified Accreditations */}
+                  <div>
+                    <span className="text-xs font-mono uppercase tracking-wider text-slate-400 block mb-3">
+                      Specialized Accreditations:
+                    </span>
+                    <div className="space-y-2">
+                      {CERTIFICATIONS.map((cert) => (
+                        <div
+                          key={cert}
+                          className="flex items-start gap-2.5 p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-xs text-slate-300"
+                        >
+                          <span className="text-indigo-400 font-mono">✓</span>
+                          <span>{cert}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400">
+                  <span>Current Status:</span>
+                  <span className="text-emerald-400 font-medium">Open to Full-Time & Roles</span>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+        </div>
       </div>
     </section>
   );
