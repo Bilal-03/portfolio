@@ -691,6 +691,17 @@ export const CASE_STUDIES: CaseStudy[] = [
   },
 ];
 
+export const FEATURED_SLUGS = [
+  "zomato-restaurant-intelligence",
+  "bizguide-ai",
+  "finassist",
+  "handovr",
+] as const;
+
+export const FEATURED_PROJECTS = FEATURED_SLUGS.map((slug) =>
+  CASE_STUDIES.find((project) => project.slug === slug)
+).filter((project): project is CaseStudy => Boolean(project));
+
 const PROJECT_DISPLAY_ORDER = [
   "handovr",
   "productlens",

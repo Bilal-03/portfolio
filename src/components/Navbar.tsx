@@ -6,12 +6,11 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { PROFILE } from "@/data/projects";
 
 const NAV_LINKS = [
-  { label: "Overview", section: "hero" },
-  { label: "Selected Work", section: "work" },
-  { label: "Philosophy", section: "positioning" },
-  { label: "Experience", section: "experience" },
-  { label: "Competencies", section: "skills" },
-  { label: "About", section: "about" },
+  { label: "Overview", section: "hero", isRoute: false },
+  { label: "Selected Work", section: "work", isRoute: false },
+  { label: "All Projects", href: "/projects", isRoute: true },
+  { label: "Competencies", section: "skills", isRoute: false },
+  { label: "About", section: "about", isRoute: false },
 ];
 
 function subscribeTheme(callback: () => void) {
@@ -47,9 +46,10 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    const sections = NAV_LINKS.map(({ section }) => document.getElementById(section)).filter(
-      (section): section is HTMLElement => Boolean(section)
-    );
+    const sections = NAV_LINKS
+      .filter((link) => !link.isRoute && link.section)
+      .map(({ section }) => document.getElementById(section!))
+      .filter((section): section is HTMLElement => Boolean(section));
     if (!sections.length) return;
 
     const observer = new IntersectionObserver(
@@ -85,16 +85,23 @@ export default function Navbar() {
           </Link>
 
           <nav className="navbar-nav" aria-label="Primary navigation">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.section}
-                href={sectionHref(link.section)}
-                className={`nav-link ${activeSection === link.section ? "active" : ""}`}
-                aria-current={activeSection === link.section ? "page" : undefined}
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const href = link.isRoute ? link.href! : sectionHref(link.section!);
+              const isActive = link.isRoute
+                ? pathname === link.href
+                : activeSection === link.section;
+
+              return (
+                <Link
+                  key={link.label}
+                  href={href}
+                  className={`nav-link ${isActive ? "active" : ""}`}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="navbar-actions">
@@ -172,18 +179,25 @@ export default function Navbar() {
           }}
         >
           <div className="flex flex-col gap-5 text-center">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.section}
-                href={sectionHref(link.section)}
-                onClick={() => setMenuOpen(false)}
-                className={`text-2xl font-bold transition-colors ${
-                  activeSection === link.section ? "text-emerald-400" : "text-slate-300 hover:text-white"
-                }`}
-              >
-                {link.label}
-              </a>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const href = link.isRoute ? link.href! : sectionHref(link.section!);
+              const isActive = link.isRoute
+                ? pathname === link.href
+                : activeSection === link.section;
+
+              return (
+                <Link
+                  key={link.label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`text-2xl font-bold transition-colors ${
+                    isActive ? "text-emerald-400" : "text-slate-300 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <div className="pt-6 flex flex-col gap-3 max-w-xs mx-auto w-full">
               <a
                 href={PROFILE.resume}

@@ -6,18 +6,18 @@ const PILLAR_ICONS = ["🎯", "📈", "🤖", "⚡"];
 
 export default function Skills() {
   return (
-    <section id="skills" className="section section-soft">
+    <section id="skills" className="section">
       <div className="site-container">
         <Reveal>
           <SectionHeader
-            index="07"
-            label="4-Pillar Competencies"
-            title="A structured toolkit spanning strategy, data & applied AI."
-            description="Capabilities engineered to bridge problem discovery, SQL-driven analytics, and production AI execution."
+            index="02"
+            label="Competencies"
+            title="Core toolkit across product, data & execution."
+            description="Capabilities engineered to bridge customer discovery, empirical SQL analytics, and production AI delivery."
           />
         </Reveal>
 
-        <div className="skills-matrix-grid">
+        <div className="skills-matrix-grid mt-10">
           {SKILLS.map((pillar, index) => (
             <Reveal key={pillar.title} delay={index * 70}>
               <div className="skill-pillar-card">
