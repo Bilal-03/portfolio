@@ -44,11 +44,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       data-project-index={projectNumber}
     >
       <div className="project-card-header">
-        <span className="project-card-index">{projectNumber} / 10</span>
+        <span className="project-card-index">{projectNumber} / 11</span>
         <span className="project-card-kind">{project.categoryLabel}</span>
       </div>
 
-      <div className="project-media-frame">
+      <div className="project-media-frame relative">
         <Image
           src={project.poster}
           alt={`${project.title} interface preview`}
@@ -56,6 +56,16 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           sizes="(max-width: 680px) 100vw, (max-width: 1024px) 50vw, 600px"
           className="project-poster-img"
         />
+        {project.keyMetricHighlight && (
+          <div className="absolute bottom-2 right-2 px-2.5 py-1 rounded bg-black/80 border border-white/10 text-right backdrop-blur-md">
+            <span className="block text-xs font-semibold text-emerald-400 font-mono">
+              {project.keyMetricHighlight.value}
+            </span>
+            <span className="block text-[9px] text-zinc-400 font-mono uppercase tracking-wider">
+              {project.keyMetricHighlight.label}
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="project-card-body">

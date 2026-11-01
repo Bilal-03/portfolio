@@ -26,7 +26,7 @@ export default function Hero() {
             <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] mb-8">
               <span className="status-dot" aria-hidden="true" />
               <span className="text-xs font-mono text-zinc-300">
-                Available for PM, Analytics & Applied AI
+                Available for Technical PM & AI Product Roles
               </span>
               <span className="text-xs text-zinc-600">·</span>
               <span className="text-xs text-zinc-400">India</span>
@@ -44,9 +44,9 @@ export default function Hero() {
           {/* Subheading / Bio */}
           <Reveal delay={120}>
             <p className="text-base sm:text-lg text-zinc-400 leading-relaxed max-w-2xl mb-10">
-              Product builder with computer science depth in AI & Machine Learning.
-              I bridge customer discovery, advanced SQL telemetry, and production AI execution
-              to ship products that matter.
+              Technical product manager with computer science depth in AI & Machine Learning.
+              I bridge 0-to-1 customer discovery, advanced SQL telemetry, and production AI execution
+              to ship products that solve real friction.
             </p>
           </Reveal>
 
@@ -87,10 +87,10 @@ export default function Hero() {
               </div>
               <div>
                 <span className="block font-mono text-zinc-500 mb-1 uppercase tracking-wider text-[11px]">
-                  Current Role
+                  Track Focus
                 </span>
-                <span className="text-zinc-300 font-medium">Project Manager</span>
-                <span className="block text-zinc-500 text-[11px] mt-0.5">Digital Data Solution</span>
+                <span className="text-zinc-300 font-medium">Technical PM & AI Product</span>
+                <span className="block text-zinc-500 text-[11px] mt-0.5">Discovery · SQL Telemetry · AI</span>
               </div>
               <div>
                 <span className="block font-mono text-zinc-500 mb-1 uppercase tracking-wider text-[11px]">

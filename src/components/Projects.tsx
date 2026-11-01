@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { CASE_STUDIES, CaseStudy } from "@/data/projects";
+import { FEATURED_PROJECTS } from "@/data/projects";
 
 const ExternalIcon = () => (
   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -19,13 +19,6 @@ const ArrowRightIcon = () => (
 );
 
 export default function Projects() {
-  const featuredProjects = [
-    CASE_STUDIES.find((p) => p.slug === "handovr"),
-    CASE_STUDIES.find((p) => p.slug === "zomato-restaurant-intelligence"),
-    CASE_STUDIES.find((p) => p.slug === "bizguide-ai"),
-    CASE_STUDIES.find((p) => p.slug === "finassist"),
-  ].filter((p): p is CaseStudy => Boolean(p));
-
   return (
     <section id="work" className="section">
       <div className="site-container">
@@ -34,14 +27,16 @@ export default function Projects() {
             index="01"
             label="Selected Work"
             title="Featured Systems."
-            description="A curated preview of 4 representative systems spanning 0-to-1 marketplace mechanics, empirical analytics, and production AI."
+            description="A curated portfolio of 6 representative systems spanning 0-to-1 marketplace discovery, multi-agent AI, and empirical data modeling."
           />
         </Reveal>
 
-        {/* Stacked Editorial Showcases */}
+        {/* Stacked 3-Pillar Executive Showcases */}
         <div className="mt-12 space-y-16 md:space-y-24">
-          {featuredProjects.map((project, index) => {
+          {FEATURED_PROJECTS.map((project, index) => {
             const isReverse = index % 2 === 1;
+            const metric = project.keyMetricHighlight;
+            const bullets = project.impactBullets || project.decisions.slice(0, 3);
 
             return (
               <Reveal key={project.slug} delay={index * 50}>
@@ -56,7 +51,7 @@ export default function Projects() {
                       >
                         <Image
                           src={project.poster}
-                          alt={`${project.title} interface`}
+                          alt={`${project.title} interface preview`}
                           fill
                           sizes="(max-width: 1024px) 100vw, 680px"
                           className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
@@ -70,6 +65,17 @@ export default function Projects() {
                             {project.year}
                           </span>
                         </div>
+
+                        {metric && (
+                          <div className="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-black/85 border border-white/15 backdrop-blur-md text-right">
+                            <span className="block text-sm font-semibold text-emerald-400 font-mono">
+                              {metric.value}
+                            </span>
+                            <span className="block text-[10px] text-zinc-400 font-mono uppercase tracking-wider">
+                              {metric.label}
+                            </span>
+                          </div>
+                        )}
                       </Link>
                     </div>
 
@@ -86,36 +92,68 @@ export default function Projects() {
                         </div>
 
                         {/* Title */}
-                        <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-3">
+                        <h3 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-2">
                           <Link href={`/work/${project.slug}`} className="hover:text-zinc-300 transition-colors">
                             {project.title}
                           </Link>
                         </h3>
 
-                        {/* Summary */}
-                        <p className="text-sm sm:text-base text-zinc-400 leading-relaxed mb-6">
+                        {/* One-Sentence Elevator Hook */}
+                        <p className="text-sm text-zinc-300 font-medium mb-5 leading-relaxed">
                           {project.summary}
                         </p>
 
-                        {/* Key Decisions / Highlights */}
-                        <div className="space-y-2 mb-6 text-xs sm:text-sm text-zinc-300">
-                          {project.decisions.slice(0, 2).map((decision) => (
-                            <div key={decision} className="flex items-start gap-2">
-                              <span className="text-zinc-500 font-mono">▸</span>
-                              <span>{decision}</span>
+                        {/* 3-Pillar Executive Summary (Problem, Solution, Impact) */}
+                        <div className="space-y-3.5 mb-6 text-xs sm:text-sm">
+                          {/* Problem Pillar */}
+                          {project.executiveProblem && (
+                            <div className="bg-white/[0.02] border border-white/5 rounded-lg p-3">
+                              <span className="text-[11px] font-mono uppercase tracking-wider text-amber-400/90 block mb-1">
+                                Problem & Friction
+                              </span>
+                              <p className="text-zinc-400 leading-relaxed text-xs">
+                                {project.executiveProblem}
+                              </p>
                             </div>
-                          ))}
+                          )}
+
+                          {/* Shipped Solution Pillar */}
+                          {project.executiveSolution && (
+                            <div className="bg-white/[0.02] border border-white/5 rounded-lg p-3">
+                              <span className="text-[11px] font-mono uppercase tracking-wider text-sky-400/90 block mb-1">
+                                Shipped Product & Architecture
+                              </span>
+                              <p className="text-zinc-400 leading-relaxed text-xs">
+                                {project.executiveSolution}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* Quantified Impact Bullets */}
+                          <div className="bg-white/[0.02] border border-white/5 rounded-lg p-3">
+                            <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-400/90 block mb-1.5">
+                              Measured Outcomes & Impact
+                            </span>
+                            <ul className="space-y-1.5">
+                              {bullets.map((bullet) => (
+                                <li key={bullet} className="flex items-start gap-2 text-xs text-zinc-300 leading-snug">
+                                  <span className="text-emerald-400 font-mono shrink-0">✓</span>
+                                  <span>{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
 
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1.5 mb-8">
+                        {/* Tech Pills */}
+                        <div className="flex flex-wrap gap-1.5 mb-6">
                           {project.tags.slice(0, 3).map((tag) => (
-                            <span key={tag} className="tag-pill">
+                            <span key={tag} className="tag-pill text-[11px]">
                               {tag}
                             </span>
                           ))}
                           {project.technicalNotes.slice(0, 2).map((tech) => (
-                            <span key={tech} className="tag-pill text-zinc-500">
+                            <span key={tech} className="tag-pill text-[11px] text-zinc-500">
                               {tech}
                             </span>
                           ))}
@@ -126,9 +164,9 @@ export default function Projects() {
                       <div className="flex items-center gap-4 pt-4 border-t border-white/10">
                         <Link
                           href={`/work/${project.slug}`}
-                          className="text-xs font-medium text-white hover:text-zinc-300 inline-flex items-center gap-1.5 transition-colors"
+                          className="text-xs font-semibold text-white hover:text-zinc-300 inline-flex items-center gap-1.5 transition-colors"
                         >
-                          <span>Read Case Study</span>
+                          <span>Read 10-Part Case Study</span>
                           <ArrowRightIcon />
                         </Link>
                         {project.liveUrl && (
@@ -171,14 +209,14 @@ export default function Projects() {
                 Looking for more case studies?
               </p>
               <p className="text-xs text-zinc-400">
-                Explore the complete index of 10 shipped full-stack products, analytics suites, and AI engines.
+                Explore the complete index of 11 shipped products, analytics suites, and AI engines.
               </p>
             </div>
             <Link
               href="/projects"
               className="button button-outline button-small inline-flex items-center gap-2 shrink-0"
             >
-              <span>View All 10 Projects</span>
+              <span>View All 11 Projects</span>
               <ArrowRightIcon />
             </Link>
           </div>

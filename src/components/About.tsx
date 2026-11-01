@@ -38,7 +38,7 @@ export default function About() {
                     <strong className="text-zinc-200">{primaryEdu?.institution || "Vellore Institute of Technology"}</strong> gives me the technical fluency to architect data pipelines, predictive models, and LLM applications directly — while my product instincts keep the focus squarely on <strong className="text-zinc-200">user friction, unit economics, and business outcomes</strong>.
                   </p>
                   <p>
-                    From conceptualizing and launching <strong className="text-zinc-200">Handovr</strong> (a 0-to-1 verified electronics marketplace with escrow mechanics) to modeling 30,000+ restaurant listings and building enterprise AP invoice OCR engines, I thrive on bringing structure to ambiguous operational problems and shipping software that users trust.
+                    From conceptualizing and launching <strong className="text-zinc-200">Handovr</strong> (a 0-to-1 verified electronics marketplace with escrow mechanics) to authoring retention strategies, modeling 30,000+ marketplace records, and building governed AI platforms, I thrive on bringing clarity to ambiguous operational problems and shipping software that users trust.
                   </p>
                 </div>
               </div>

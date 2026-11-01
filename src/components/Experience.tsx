@@ -11,7 +11,7 @@ export default function Experience() {
             index="02"
             label="Track Record"
             title="Work Experience."
-            description="Track record across product management, startup building (0-to-1 marketplace), enterprise AI automation, and business operations."
+            description="Product discovery, 0-to-1 marketplace building, enterprise AI automation, and business systems engineering."
           />
         </Reveal>
 

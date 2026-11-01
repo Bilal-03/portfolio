@@ -83,6 +83,17 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
               <Reveal delay={100}>
                 <div>
+                  {project.keyMetricHighlight && (
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 mb-4">
+                      <span className="text-xs font-mono font-semibold text-emerald-400">
+                        {project.keyMetricHighlight.value}
+                      </span>
+                      <span className="text-xs text-zinc-400 font-mono">·</span>
+                      <span className="text-xs text-zinc-300 font-mono">
+                        {project.keyMetricHighlight.label}
+                      </span>
+                    </div>
+                  )}
                   <p className="case-study-summary">{project.summary}</p>
                   <div className="case-study-hero-links">
                     {project.liveUrl && (

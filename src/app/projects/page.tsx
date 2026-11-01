@@ -46,7 +46,7 @@ export default function ProjectsPage() {
                 index="All"
                 label="Case Study Archive"
                 title="All Shipped Projects & Systems."
-                description="Explore problem framing, architectures, and empirical evidence behind all 10 systems spanning 0-to-1 marketplaces, SQL intelligence suites, OCR automation, and predictive engines."
+                description="Explore problem framing, architectures, and empirical evidence behind all 11 systems spanning 0-to-1 marketplaces, SQL intelligence suites, OCR automation, and predictive engines."
               />
             </Reveal>
 
