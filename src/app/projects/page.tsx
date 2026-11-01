@@ -34,10 +34,10 @@ export default function ProjectsPage() {
           <div className="site-container">
             <div className="mb-6">
               <Link
-                href="/#work"
-                className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+                href="/"
+                className="inline-flex items-center gap-2 text-sm text-[#ffdb70] hover:underline transition-colors"
               >
-                <span>← Back to Overview</span>
+                <span>← Back to Portfolio</span>
               </Link>
             </div>
 

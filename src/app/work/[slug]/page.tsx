@@ -69,8 +69,8 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
       <main id="main-content" className="case-study-main">
         <header className="case-study-hero">
           <div className="site-container">
-            <Link href="/#work" className="case-study-back">
-              ← Back to selected work
+            <Link href="/" className="case-study-back text-[#ffdb70] hover:underline flex items-center gap-1.5 font-medium mb-4">
+              ← Back to Portfolio
             </Link>
 
             <div className="case-study-hero-grid">

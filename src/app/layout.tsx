@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { Poppins, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -19,7 +20,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Bilal Choudhary — Product Manager & Analytics Practitioner",
+  title: "Bilal Choudhary — Product Manager & AI Systems",
   description:
     "Bilal Choudhary turns complex problems and empirical data into high-impact digital products through product strategy, analytics, and applied AI systems.",
   keywords: [
@@ -33,14 +34,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Bilal Choudhary" }],
   openGraph: {
-    title: "Bilal Choudhary — Product Manager & Analytics Practitioner",
+    title: "Bilal Choudhary — Product Manager & AI Systems",
     description:
       "Turning user pain points, marketplace economics, and data into useful digital products.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bilal Choudhary — Product Manager & Analytics Practitioner",
+    title: "Bilal Choudhary — Product Manager & AI Systems",
     description:
       "Turning user pain points, marketplace economics, and data into useful digital products.",
   },
@@ -52,28 +53,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${ibmPlexMono.variable}`}>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var saved = localStorage.getItem('portfolio-theme');
-                  if (saved === 'light') {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                  } else {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                  }
-                } catch (e) {
-                  document.documentElement.setAttribute('data-theme', 'dark');
-                }
-              })();
-            `,
-          }}
-        />
-      </head>
-      <body>{children}</body>
+    <html lang="en" className={`${poppins.variable} ${ibmPlexMono.variable}`}>
+      <body className="font-poppins bg-[#121212] text-white selection:bg-[#ffdb70] selection:text-[#121212]">
+        {children}
+      </body>
     </html>
   );
 }
