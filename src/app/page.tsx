@@ -5,6 +5,7 @@ import Sidebar from "@/components/vcard/Sidebar";
 import Navbar, { NavTab } from "@/components/vcard/Navbar";
 import AboutTab from "@/components/vcard/AboutTab";
 import ResumeTab from "@/components/vcard/ResumeTab";
+import SkillsTab from "@/components/vcard/SkillsTab";
 import PortfolioTab from "@/components/vcard/PortfolioTab";
 import ContactTab from "@/components/vcard/ContactTab";
 
@@ -12,6 +13,7 @@ const TAB_ALIASES: Record<string, NavTab> = {
   about: "about",
   experience: "experience",
   resume: "experience",
+  skills: "skills",
   projects: "projects",
   portfolio: "projects",
   insights: "projects",
@@ -55,6 +57,7 @@ export default function Home() {
               <AboutTab />
             )}
             {activeTab === "experience" && <ResumeTab />}
+            {activeTab === "skills" && <SkillsTab />}
             {activeTab === "projects" && <PortfolioTab />}
             {activeTab === "contact" && <ContactTab />}
           </div>

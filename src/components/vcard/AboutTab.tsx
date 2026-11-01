@@ -32,7 +32,7 @@ export default function AboutTab() {
       </section>
       <section className="vcard-section">
         <h3 className="vcard-section-title">Tools &amp; Technologies</h3>
-        <div className="vcard-tools-strip">{TECH_STACK.map((tool) => <Link key={tool} href="/?tab=experience" className="vcard-tool-pill">{tool}</Link>)}</div>
+        <div className="vcard-tools-strip">{TECH_STACK.map((tool) => <Link key={tool} href="/?tab=skills" className="vcard-tool-pill">{tool}</Link>)}</div>
       </section>
     </article>
   );

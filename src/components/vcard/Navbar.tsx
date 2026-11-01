@@ -1,6 +1,6 @@
 "use client";
 
-export type NavTab = "about" | "experience" | "projects" | "contact";
+export type NavTab = "about" | "experience" | "skills" | "projects" | "contact";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -10,6 +10,7 @@ interface NavbarProps {
 const TABS: { id: NavTab; label: string }[] = [
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
+  { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
