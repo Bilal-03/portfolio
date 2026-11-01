@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "@/components/vcard/Sidebar";
 import Navbar, { NavTab } from "@/components/vcard/Navbar";
 import AboutTab from "@/components/vcard/AboutTab";
@@ -14,16 +14,43 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<NavTab>("about");
   const [selectedTestimonial, setSelectedTestimonial] = useState<TestimonialItem | null>(null);
 
+  useEffect(() => {
+    const validTabs: NavTab[] = ["about", "resume", "portfolio", "insights", "contact"];
+    const readTab = () => {
+      const value = new URLSearchParams(window.location.search).get("tab") as NavTab | null;
+      setActiveTab(value && validTabs.includes(value) ? value : "about");
+    };
+
+    readTab();
+    window.addEventListener("popstate", readTab);
+    return () => window.removeEventListener("popstate", readTab);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedTestimonial) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedTestimonial(null);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [selectedTestimonial]);
+
+  const handleTabChange = (tab: NavTab) => {
+    setActiveTab(tab);
+    window.history.pushState({}, "", `/?tab=${tab}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <main className="min-h-screen bg-[#121212] text-zinc-300 pb-20 lg:pb-12 pt-6 sm:pt-10 px-4 sm:px-6">
-      <div className="max-w-[1200px] mx-auto flex flex-col xl:flex-row items-start gap-6 xl:gap-7">
+    <main className="vcard-page">
+      <div className="vcard-layout">
         {/* Left Sidebar */}
         <Sidebar />
 
         {/* Right Main Content Card */}
-        <div className="flex-1 w-full vcard-container p-5 sm:p-8 xl:p-10 relative overflow-hidden">
+        <div className="vcard-main vcard-container">
           {/* Top-Right Floating Desktop & Mobile Bottom Navbar */}
-          <Navbar activeTab={activeTab} onTabChange={setActiveTab} />
+          <Navbar activeTab={activeTab} onTabChange={handleTabChange} />
 
           {/* Active Tab Content */}
           <div className="pt-2 lg:pt-3">
@@ -32,7 +59,7 @@ export default function Home() {
             )}
             {activeTab === "resume" && <ResumeTab />}
             {activeTab === "portfolio" && <PortfolioTab />}
-            {activeTab === "blog" && <BlogTab />}
+            {activeTab === "insights" && <BlogTab />}
             {activeTab === "contact" && <ContactTab />}
           </div>
         </div>

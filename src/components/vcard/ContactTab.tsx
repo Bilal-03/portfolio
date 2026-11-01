@@ -45,8 +45,8 @@ export default function ContactTab() {
 
       {/* Map Box */}
       <section className="mb-8 overflow-hidden rounded-2xl border border-[#383838] bg-[#1e1e1f] relative">
-        <div className="w-full h-56 sm:h-72 relative">
-          <iframe
+          <div className="w-full h-56 sm:h-72 relative">
+            <iframe
             title="Location Map"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.562094254425!2d77.2090212!3d28.6139391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b049d59f%3A0xb3559e74d63d6232!2sNew%20Delhi%2C%20Delhi%2C%20India!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
             className="w-full h-full border-0 grayscale invert contrast-125 opacity-85"
@@ -82,12 +82,14 @@ export default function ContactTab() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
+            <p className="text-xs text-zinc-400 mb-4">This form opens your email app with the message prepared. Review it and press Send there.</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <input
                   type="text"
                   name="fullname"
                   required
+                  aria-label="Full name"
                   placeholder="Full name"
                   value={formData.fullname}
                   onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
@@ -100,6 +102,7 @@ export default function ContactTab() {
                   type="email"
                   name="email"
                   required
+                  aria-label="Email address"
                   placeholder="Email address"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -113,7 +116,8 @@ export default function ContactTab() {
                 name="message"
                 required
                 rows={5}
-                placeholder="Your Message..."
+                aria-label="Your message"
+                placeholder="Your message..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className="w-full bg-[#1e1e1f] border border-[#383838] focus:border-[#ffdb70] rounded-xl px-4 py-3 text-xs text-white placeholder-zinc-500 outline-none transition-colors resize-none"
@@ -131,7 +135,7 @@ export default function ContactTab() {
                 }`}
               >
                 <PaperPlaneIcon />
-                <span>Send Message</span>
+                <span>Open Email App</span>
               </button>
             </div>
           </form>

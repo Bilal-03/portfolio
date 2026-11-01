@@ -1,198 +1,48 @@
 "use client";
 
 import Image from "next/image";
-import { PROFILE, EDUCATION } from "@/data/projects";
+import Link from "next/link";
+import { EDUCATION } from "@/data/projects";
 import { TestimonialItem } from "./TestimonialModal";
 
-interface AboutTabProps {
-  onSelectTestimonial: (item: TestimonialItem) => void;
-}
+interface AboutTabProps { onSelectTestimonial: (item: TestimonialItem) => void; }
 
 const SERVICES = [
-  {
-    title: "0-to-1 Product Strategy",
-    icon: "/vcard/icons/icon-design.svg",
-    description:
-      "Framing ambiguous user problems, conducting customer discovery interviews, and engineering verified marketplace flows from scratch.",
-  },
-  {
-    title: "Applied AI & ML Systems",
-    icon: "/vcard/icons/icon-dev.svg",
-    description:
-      "Architecting high-accuracy OCR extraction pipelines, governed multi-agent workflows, and production LLM evaluations with human-in-the-loop review.",
-  },
-  {
-    title: "Product Analytics & SQL Telemetry",
-    icon: "/vcard/icons/icon-photo.svg",
-    description:
-      "Replacing vanity metrics with decision-grade SQL models, composite market opportunity indices, and funnel drop-off analytics.",
-  },
-  {
-    title: "Full-Stack Prototyping",
-    icon: "/vcard/icons/icon-app.svg",
-    description:
-      "Shipping high-performance, type-safe web applications using Next.js, React 19, Python, PostgreSQL, and modern cloud primitives.",
-  },
+  { title: "0-to-1 Product Strategy", icon: "/vcard/icons/icon-design.svg", description: "Framing ambiguous user problems, conducting customer discovery interviews, and engineering verified marketplace flows from scratch." },
+  { title: "Applied AI & ML Systems", icon: "/vcard/icons/icon-dev.svg", description: "Architecting high-accuracy OCR pipelines, governed multi-agent workflows, and production LLM evaluations with human review." },
+  { title: "Product Analytics & SQL Telemetry", icon: "/vcard/icons/icon-photo.svg", description: "Replacing vanity metrics with decision-grade SQL models, opportunity indices, and funnel drop-off analytics." },
+  { title: "Full-Stack Prototyping", icon: "/vcard/icons/icon-app.svg", description: "Shipping type-safe web applications using Next.js, React, Python, PostgreSQL, and modern cloud primitives." },
 ];
 
-const TESTIMONIALS: TestimonialItem[] = [
-  {
-    id: "t1",
-    name: "Alex Carter",
-    title: "Engineering Director · FinTech Systems",
-    avatar: "/vcard/avatars/avatar-1.png",
-    date: "August 2024",
-    text: "Bilal has a rare blend of engineering rigor and user-centric product thinking. He turned an ambiguous invoice extraction problem into a production pipeline achieving 94%+ field extraction accuracy with a bulletproof human-in-the-loop review queue.",
-  },
-  {
-    id: "t2",
-    name: "Sophia Martinez",
-    title: "Head of Product · Peer-to-Peer Marketplaces",
-    avatar: "/vcard/avatars/avatar-2.png",
-    date: "June 2024",
-    text: "During the 0-to-1 discovery for Handovr, Bilal led 40+ user interviews that uncovered critical drop-off anxieties. His 16-point verified transaction flow and escrow mechanics drove a 38% increase in buyer readiness.",
-  },
-  {
-    id: "t3",
-    name: "David Chen",
-    title: "Lead Data Scientist · Marketplace Intelligence",
-    avatar: "/vcard/avatars/avatar-3.png",
-    date: "March 2024",
-    text: "Bilal modeled over 30,000 marketplace records and formulated a composite Opportunity Index that cut through noise. His SQL pipelines and empirical dashboards gave us immediate clarity on regional demand gaps.",
-  },
-  {
-    id: "t4",
-    name: "Rachel Kumar",
-    title: "Operations Lead · Enterprise Solutions",
-    avatar: "/vcard/avatars/avatar-4.png",
-    date: "January 2024",
-    text: "Bilal’s focus on empirical outcomes rather than hypothetical features sets him apart. He consistently aligns cross-functional engineering, UX, and operations around clear, measurable deliverables.",
-  },
+const HIGHLIGHTS: TestimonialItem[] = [
+  { id: "handovr", name: "Handovr discovery", title: "40+ interviews · 0-to-1 marketplace", avatar: "/vcard/avatars/avatar-1.png", date: "Buyer readiness +38%", text: "Led discovery across Delhi NCR and translated buyer distrust into a 16-point hardware verification and escrow flow. Funnel telemetry reduced negotiation drop-offs by 28%.", href: "/work/handovr" },
+  { id: "productlens", name: "ProductLens investigations", title: "Governed analytics copilot", avatar: "/vcard/avatars/avatar-2.png", date: "100% AST validation", text: "Designed semantic catalog specs and deterministic text-to-SQL guardrails so non-technical stakeholders could complete metric investigations 3x faster.", href: "/work/productlens" },
+  { id: "bizguide-ai", name: "BizGuide AI grounding", title: "Multi-agent compliance workspace", avatar: "/vcard/avatars/avatar-3.png", date: "92% citation groundedness", text: "Routed regulatory questions to specialist agents and paired PDF previews with source evidence to keep guidance grounded for Indian businesses.", href: "/work/bizguide-ai" },
+  { id: "karobarkit", name: "KarobarKit utilities", title: "Privacy-first operational toolkit", avatar: "/vcard/avatars/avatar-4.png", date: "82 India-focused tools", text: "Built a local-first registry of calculators and document utilities with sub-100ms calculations, PDF/QR exports, and client-side data privacy.", href: "/work/karobarkit" },
 ];
 
-const TECH_STACK = [
-  { name: "Next.js", tag: "Frontend & SSR" },
-  { name: "React 19", tag: "UI Framework" },
-  { name: "TypeScript", tag: "Type Safety" },
-  { name: "Python", tag: "AI / Analytics" },
-  { name: "PostgreSQL", tag: "Relational DB" },
-  { name: "Supabase", tag: "Backend Cloud" },
-  { name: "PyTorch", tag: "Deep Learning" },
-  { name: "Tailwind CSS", tag: "Design System" },
-];
+const TECH_STACK = ["Next.js", "React 19", "TypeScript", "Python", "PostgreSQL", "Supabase", "FastAPI", "Pandas", "DuckDB", "Pinecone", "Tailwind CSS", "Docker"];
 
 export default function AboutTab({ onSelectTestimonial }: AboutTabProps) {
-  const primaryEdu = EDUCATION[0];
-
+  const education = EDUCATION[0];
   return (
-    <article className="animate-vcard-fade">
-      {/* Header */}
-      <header className="mb-6">
-        <h2 className="vcard-article-title">About Me</h2>
-      </header>
-
-      {/* Intro Narrative */}
-      <section className="text-zinc-300 text-sm leading-relaxed space-y-3.5 mb-9 font-light">
-        <p>
-          I am a <strong className="font-semibold text-white">Technical Product Manager</strong> with a strong computer science foundation in <strong className="font-semibold text-white">AI & Machine Learning</strong> from <strong className="font-semibold text-white">{primaryEdu?.institution || "VIT"}</strong>. I bridge customer pain points, data-driven unit economics, and production engineering reality.
-        </p>
-        <p>
-          My methodology centers on engineering products grounded in empirical evidence rather than intuition. From conceptualizing and launching <strong className="font-semibold text-white">Handovr</strong> (a 0-to-1 verified electronics marketplace with escrow mechanics) to modeling 30,000+ records and deploying governed AI pipelines, I thrive on bringing clarity to ambiguous operational systems and shipping software users can trust.
-        </p>
+    <article className="vcard-article animate-vcard-fade">
+      <header><h2 className="vcard-article-title">About Me</h2></header>
+      <section className="vcard-about-text">
+        <p>I am a <strong>Technical Product Manager</strong> with a computer science foundation in <strong>AI &amp; Machine Learning</strong> from <strong>{education?.institution}</strong>. I connect customer pain points, data-driven unit economics, and production engineering reality.</p>
+        <p>My work turns ambiguous operational systems into useful products: from launching <strong>Handovr</strong>, a verified electronics marketplace with escrow mechanics, to building governed AI workflows and decision-grade analytics that teams can trust.</p>
       </section>
-
-      {/* What I'm Doing (Services) */}
-      <section className="mb-9">
-        <h3 className="text-white text-lg font-semibold tracking-tight mb-5">
-          What I&apos;m Doing
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {SERVICES.map((service, idx) => (
-            <div key={idx} className="vcard-content-card flex items-start gap-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-zinc-700/50 to-zinc-900 border border-[#383838] flex items-center justify-center shrink-0 p-2.5">
-                <Image
-                  src={service.icon}
-                  alt={service.title}
-                  width={28}
-                  height={28}
-                />
-              </div>
-
-              <div>
-                <h4 className="text-white text-sm font-semibold mb-1.5">
-                  {service.title}
-                </h4>
-                <p className="text-zinc-400 text-xs leading-relaxed font-light">
-                  {service.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      <section className="vcard-section">
+        <h3 className="vcard-section-title">What I&apos;m Doing</h3>
+        <div className="vcard-service-list">{SERVICES.map((service) => <div key={service.title} className="vcard-service-card"><div className="vcard-service-icon"><Image src={service.icon} alt="" width={40} height={40} /></div><div><h4>{service.title}</h4><p>{service.description}</p></div></div>)}</div>
       </section>
-
-      {/* Testimonials */}
-      <section className="mb-9">
-        <h3 className="text-white text-lg font-semibold tracking-tight mb-5">
-          Testimonials & Impact Highlights
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {TESTIMONIALS.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => onSelectTestimonial(item)}
-              className="vcard-content-card cursor-pointer group hover:border-[#ffdb70]/40 transition-colors"
-            >
-              <div className="flex items-start gap-3.5 mb-3">
-                <div className="relative w-12 h-12 rounded-xl bg-[#2b2b2c] p-0.5 border border-[#383838] shrink-0">
-                  <Image
-                    src={item.avatar}
-                    alt={item.name}
-                    fill
-                    sizes="48px"
-                    className="object-cover rounded-[10px]"
-                  />
-                </div>
-
-                <div className="min-w-0 flex-1">
-                  <h4 className="text-white text-sm font-semibold truncate group-hover:text-[#ffdb70] transition-colors">
-                    {item.name}
-                  </h4>
-                  <p className="text-zinc-400 text-[11px] truncate">{item.title}</p>
-                </div>
-              </div>
-
-              <p className="text-zinc-300 text-xs leading-relaxed line-clamp-3 font-light">
-                &ldquo;{item.text}&rdquo;
-              </p>
-
-              <span className="text-[11px] text-[#ffdb70] font-medium mt-3 inline-block">
-                Read full note →
-              </span>
-            </div>
-          ))}
-        </div>
+      <section className="vcard-section">
+        <h3 className="vcard-section-title">Project Highlights</h3>
+        <div className="vcard-highlight-list">{HIGHLIGHTS.map((item) => <button key={item.id} type="button" className="vcard-highlight-card" onClick={() => onSelectTestimonial(item)}><span className="vcard-highlight-avatar"><Image src={item.avatar} alt="" fill sizes="60px" /></span><span className="vcard-highlight-body"><strong>{item.name}</strong><small>{item.title}</small><span>“{item.text}”</span><em>Open highlight →</em></span></button>)}</div>
       </section>
-
-      {/* Tech Stack & Platform Ecosystem */}
-      <section>
-        <h3 className="text-white text-lg font-semibold tracking-tight mb-5">
-          Core Technologies & Stack
-        </h3>
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {TECH_STACK.map((tech) => (
-            <div
-              key={tech.name}
-              className="bg-[#202022] border border-[#383838] rounded-xl p-3 text-center hover:border-[#ffdb70]/50 transition-colors"
-            >
-              <span className="text-white text-xs font-semibold block">{tech.name}</span>
-              <span className="text-[10px] text-zinc-400 block mt-0.5">{tech.tag}</span>
-            </div>
-          ))}
-        </div>
+      <section className="vcard-section">
+        <h3 className="vcard-section-title">Tools &amp; Technologies</h3>
+        <div className="vcard-tools-strip">{TECH_STACK.map((tool) => <Link key={tool} href="/?tab=resume" className="vcard-tool-pill">{tool}</Link>)}</div>
       </section>
     </article>
   );

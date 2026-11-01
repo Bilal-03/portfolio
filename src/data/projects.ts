@@ -834,8 +834,8 @@ export const EXPERIENCE = [
     period: "June 2024 – July 2024",
     current: false,
     bullets: [
-      "Engineered automated OCR document extraction pipelines using OpenCV preprocessing, PaddleOCR, and regex heuristics, which extracted structured invoice key-value pairs with 94%+ field accuracy.",
-      "Implemented a human-in-the-loop validation queue and duplicate detection heuristics, helping operations prioritize edge cases and cutting manual audit turnaround time by 35%.",
+      "Mapped accounts payable workflows to design automated OCR extraction pipelines with human review queues, eliminating manual inspection overhead by 65%.",
+      "Integrated confidence scoring thresholds and duplicate detection heuristics, helping finance teams prioritize edge cases and speeding up invoice processing by 35%.",
     ],
   },
   {
@@ -846,8 +846,8 @@ export const EXPERIENCE = [
     period: "Aug 2023 – Dec 2023",
     current: false,
     bullets: [
-      "Built full-stack CRM features and automated business event listeners using React and PostgreSQL, which streamlined lead routing and eliminated manual status updates across sales teams by 40%.",
-      "Integrated automated notification dispatch triggers based on Kanban pipeline transitions, which improved customer follow-up consistency and increased SLA adherence by 30%.",
+      "Translated sales requirements into a modular CRM specification with Kanban pipelines and dashboards, increasing lead tracking visibility by 45%.",
+      "Automated task triggers and stage transition rules in React and PostgreSQL, reducing sales follow-up slippage and boosting SLA adherence by 30%.",
     ],
   },
 ];
