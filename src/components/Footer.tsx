@@ -20,39 +20,41 @@ export default function Footer() {
   };
 
   return (
-    <footer id="contact" className="section border-t border-white/10 pt-16 pb-12">
+    <footer id="contact" className="section border-t border-white/10 pt-20 pb-14">
       <div className="site-container">
         
-        {/* Contact Bento Box */}
-        <div className="bento-card p-8 sm:p-12 border border-white/10 relative overflow-hidden mb-12">
-          {/* Subtle ambient glow */}
-          <div className="absolute top-0 right-1/4 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
+        {/* Quiet Editorial CTA */}
+        <div className="max-w-2xl mb-16">
           <Reveal>
-            <div className="max-w-2xl">
-              <span className="eyebrow">Get in Touch</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 block mb-3">
+                Get in Touch
+              </span>
+
+              <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight mb-4">
                 Let&apos;s build high-leverage products together.
               </h2>
-              <p className="text-sm sm:text-base text-slate-400 leading-relaxed mb-8">
-                Open to full-time roles in Product Management, Product Analytics, and Applied AI Engineering. Reach out directly or connect on professional platforms.
+
+              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed mb-8">
+                Open to full-time roles in Product Management, Product Analytics, and Applied AI Engineering.
+                Reach out directly via email or connect on LinkedIn and GitHub.
               </p>
 
+              {/* Direct Actions */}
               <div className="flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="button button-accent button-large inline-flex items-center gap-2"
+                  className="button button-primary button-large inline-flex items-center gap-2"
                   title="Copy email to clipboard"
                 >
                   {copied ? (
                     <>
-                      <span className="text-emerald-300">✓</span>
+                      <span className="text-emerald-400">✓</span>
                       <span>Copied: {PROFILE.email}</span>
                     </>
                   ) : (
                     <>
-                      <span>📋</span>
                       <span>Copy Email ({PROFILE.email})</span>
                     </>
                   )}
@@ -65,17 +67,29 @@ export default function Footer() {
                   <span>Send Direct Email</span>
                   <ExternalIcon />
                 </a>
+
+                <a
+                  href={PROFILE.resume}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="button button-outline button-large inline-flex items-center gap-1.5"
+                >
+                  <span>Resume PDF</span>
+                  <ExternalIcon />
+                </a>
               </div>
             </div>
           </Reveal>
         </div>
 
         {/* Bottom Metadata & Social Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 pt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500 pt-8 border-t border-white/10">
           <div className="flex items-center gap-2">
-            <span className="text-slate-400 font-medium">Bilal Choudhary</span>
+            <span className="text-zinc-300 font-medium">Bilal Choudhary</span>
             <span>·</span>
             <span>Product · Analytics · Applied AI</span>
+            <span>·</span>
+            <span>India</span>
           </div>
 
           <div className="flex items-center gap-6">
@@ -83,7 +97,7 @@ export default function Footer() {
               href={PROFILE.linkedin}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-slate-300 transition-colors inline-flex items-center gap-1"
+              className="text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-1"
             >
               <span>LinkedIn</span>
               <ExternalIcon />
@@ -92,7 +106,7 @@ export default function Footer() {
               href={PROFILE.github}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-slate-300 transition-colors inline-flex items-center gap-1"
+              className="text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-1"
             >
               <span>GitHub</span>
               <ExternalIcon />

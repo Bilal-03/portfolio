@@ -6,11 +6,11 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { PROFILE } from "@/data/projects";
 
 const NAV_LINKS = [
-  { label: "Overview", section: "hero", isRoute: false },
-  { label: "Selected Work", section: "work", isRoute: false },
-  { label: "All Projects", href: "/projects", isRoute: true },
-  { label: "Competencies", section: "skills", isRoute: false },
+  { label: "Work", section: "work", isRoute: false },
+  { label: "Experience", section: "experience", isRoute: false },
+  { label: "Skills", section: "skills", isRoute: false },
   { label: "About", section: "about", isRoute: false },
+  { label: "All Projects", href: "/projects", isRoute: true },
 ];
 
 function subscribeTheme(callback: () => void) {
