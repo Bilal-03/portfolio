@@ -6,34 +6,31 @@ import Navbar, { NavTab } from "@/components/vcard/Navbar";
 import AboutTab from "@/components/vcard/AboutTab";
 import ResumeTab from "@/components/vcard/ResumeTab";
 import PortfolioTab from "@/components/vcard/PortfolioTab";
-import BlogTab from "@/components/vcard/BlogTab";
 import ContactTab from "@/components/vcard/ContactTab";
-import TestimonialModal, { TestimonialItem } from "@/components/vcard/TestimonialModal";
+
+const TAB_ALIASES: Record<string, NavTab> = {
+  about: "about",
+  experience: "experience",
+  resume: "experience",
+  projects: "projects",
+  portfolio: "projects",
+  insights: "projects",
+  contact: "contact",
+};
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<NavTab>("about");
-  const [selectedTestimonial, setSelectedTestimonial] = useState<TestimonialItem | null>(null);
 
   useEffect(() => {
-    const validTabs: NavTab[] = ["about", "resume", "portfolio", "insights", "contact"];
     const readTab = () => {
-      const value = new URLSearchParams(window.location.search).get("tab") as NavTab | null;
-      setActiveTab(value && validTabs.includes(value) ? value : "about");
+      const value = new URLSearchParams(window.location.search).get("tab");
+      setActiveTab(value ? TAB_ALIASES[value] ?? "about" : "about");
     };
 
     readTab();
     window.addEventListener("popstate", readTab);
     return () => window.removeEventListener("popstate", readTab);
   }, []);
-
-  useEffect(() => {
-    if (!selectedTestimonial) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelectedTestimonial(null);
-    };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [selectedTestimonial]);
 
   const handleTabChange = (tab: NavTab) => {
     setActiveTab(tab);
@@ -55,21 +52,15 @@ export default function Home() {
           {/* Active Tab Content */}
           <div className="pt-2 lg:pt-3">
             {activeTab === "about" && (
-              <AboutTab onSelectTestimonial={setSelectedTestimonial} />
+              <AboutTab />
             )}
-            {activeTab === "resume" && <ResumeTab />}
-            {activeTab === "portfolio" && <PortfolioTab />}
-            {activeTab === "insights" && <BlogTab />}
+            {activeTab === "experience" && <ResumeTab />}
+            {activeTab === "projects" && <PortfolioTab />}
             {activeTab === "contact" && <ContactTab />}
           </div>
         </div>
       </div>
 
-      {/* Testimonial / Detail Modal Popup */}
-      <TestimonialModal
-        item={selectedTestimonial}
-        onClose={() => setSelectedTestimonial(null)}
-      />
     </main>
   );
 }

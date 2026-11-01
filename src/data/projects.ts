@@ -924,6 +924,6 @@ export const EDUCATION = [
 export const CERTIFICATIONS = [
   "Python Programming – IIT Bombay (Certificate)",
   "C Programming – IIT Bombay (Certificate)",
-  "AI for All: From Basics to GenAI Practice – NVIDIA (Certificate)",
   "Cisco Packet Tracer / Network Simulation – Cisco Networking Academy (Credly Badge)",
+  "AI for All: From Basics to GenAI Practice – NVIDIA (Certificate)",
 ];

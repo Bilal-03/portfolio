@@ -1,6 +1,6 @@
 "use client";
 
-export type NavTab = "about" | "resume" | "portfolio" | "insights" | "contact";
+export type NavTab = "about" | "experience" | "projects" | "contact";
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -9,9 +9,8 @@ interface NavbarProps {
 
 const TABS: { id: NavTab; label: string }[] = [
   { id: "about", label: "About" },
-  { id: "resume", label: "Resume" },
-  { id: "portfolio", label: "Portfolio" },
-  { id: "insights", label: "Insights" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -19,7 +18,7 @@ export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
   return (
     <>
       {/* Desktop Navbar (Top-Right Floating Corner) */}
-      <nav className="hidden lg:block absolute top-0 right-0 z-20 vcard-navbar-desktop px-7 py-0" aria-label="Portfolio sections">
+      <nav className="hidden lg:block absolute top-0 right-0 z-20 vcard-navbar-desktop px-7 py-0" aria-label="Site sections">
         <ul className="flex items-center gap-8">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -44,7 +43,7 @@ export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
       </nav>
 
       {/* Mobile Navbar (Fixed Bottom Dock) */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 vcard-navbar-mobile py-2.5 px-3" aria-label="Portfolio sections">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 vcard-navbar-mobile py-2.5 px-3" aria-label="Site sections">
         <ul className="flex items-center justify-around">
           {TABS.map((tab) => {
             const isActive = activeTab === tab.id;
